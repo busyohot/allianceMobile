@@ -80,7 +80,7 @@ public class ImageActivity extends AppCompatActivity {
     private String FileName = null;
 
 
-    @Override
+    @SuppressLint("ResourceType") @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
@@ -129,6 +129,7 @@ String imageGubn = getIntent().getStringExtra("imageGubn");
             {
                 e.printStackTrace();
             }
+
             if(!centerImage.isEnabled())
             {
                 downBtn.setVisibility(View.GONE);

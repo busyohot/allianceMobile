@@ -3,14 +3,12 @@ package com.mobile.alliance.activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -114,10 +112,11 @@ String completeMsg="";
 
 
 
-
     String instMobileMIdValue;
     String dlvyStatCdValue;
 
+    //2021-11-22 정연호 추가. 시공일 수신
+    String instDtValue;
 
 
 
@@ -137,6 +136,26 @@ String completeMsg="";
         String d = getCalDay(mFormat.format(mDate) ,0);
         return d;
     }
+
+
+
+    private String getInstDt() throws ParseException {
+
+        String from = instDtValue.substring(0,4)+"-"+instDtValue.substring(4,6)+"-"+instDtValue.substring(6,8) +" 00:00:00";
+
+        SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date toto = fm.parse(from);
+
+        String gd = getCalDay(mFormat.format(toto) ,0);
+        return gd;
+
+
+    }
+
+
+
+
     private String getTime() throws ParseException {
         mNow = System.currentTimeMillis();
         mDate = new Date(mNow);
@@ -279,6 +298,9 @@ String completeMsg="";
         instMobileMIdValue =   getIntent().getStringExtra("instMobileMId");
         dlvyStatCdValue =   getIntent().getStringExtra("dlvyStatCd");
 
+        //2021-11-22 정연호. 시공일 수신
+        instDtValue  =   getIntent().getStringExtra("instDt");
+
         //화면 열리자마자 조회 SP
         //Log.d("instMobileMIdValue",instMobileMIdValue);
         mSrchTalk(new SrchTalkVO(instMobileMIdValue)       );
@@ -316,7 +338,6 @@ String completeMsg="";
         talkTblSoMId        =   (TextView)findViewById(R.id.talkTblSoMId);
 
         editTextTextMultiLine = (EditText) findViewById(R.id.editTextTextMultiLine);
-
 
 
         sendTalkBack.setOnClickListener(new ImageView.OnClickListener() {
@@ -849,7 +870,13 @@ String completeMsg="";
 
                     //배송예정일 넣기
 
-                    dlvyDtText.setText(getDate());
+                    //dlvyDtText.setText(getDate());
+
+
+                    //dlvyDtText.setText(instDtValue);
+
+                    dlvyDtText.setText(getInstDt());
+
                     dlvyDtText.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

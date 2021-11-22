@@ -29,10 +29,12 @@ import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 
+import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -561,6 +563,10 @@ public class DeliveryListDetail extends AppCompatActivity {
 
                             sendTalk.putExtra("instMobileMId", result.get(0).getInstMobileMId());
                             sendTalk.putExtra("dlvyStatCd", result.get(0).getDlvyStatCd());
+
+                            //2021-11-22 정연호 추가. 시공일 전송
+                            sendTalk.putExtra("instDt", result.get(0).getInstDt());
+                            
                             startActivity(sendTalk);
 
                         }
@@ -1051,20 +1057,34 @@ public class DeliveryListDetail extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
 
-                                if(prodUrl != null || !prodUrl.toString().equals(""))
-                                {
-                                    //확대화면 보는 Activity를 오픈함
-                                    Intent imageActivity = new Intent(DeliveryListDetail.this, ImageActivity.class);
-                                    imageActivity.putExtra("imageUri",prodUrl);
-                                    imageActivity.putExtra("imageNo", finalI +"");
-                                    imageActivity.putExtra("imageType","download");
 
-                                    startActivity(imageActivity);  //다음 액티비티를 열고
+
+
+                                if(URLUtil.isValidUrl(prodUrl))
+                                {
+                                    if(prodUrl != null || !prodUrl.toString().equals(""))
+                                    {
+                                        //확대화면 보는 Activity를 오픈함
+                                        Intent imageActivity = new Intent(DeliveryListDetail.this, ImageActivity.class);
+                                        imageActivity.putExtra("imageUri",prodUrl);
+                                        imageActivity.putExtra("imageNo", finalI +"");
+                                        imageActivity.putExtra("imageType","download");
+
+                                        startActivity(imageActivity);  //다음 액티비티를 열고
+                                    }
+                                    else
+                                    {
+                                        commonHandler.showAlertDialog("이미지 열기 실패","이미지 경로가 존재하지 않습니다.");
+                                    }
                                 }
                                 else
                                 {
-                                    commonHandler.showAlertDialog("이미지 열기 실패","이미지 경로가 존재하지 않습니다.");
+                                    commonHandler.showAlertDialog("웹 주소오류","올바른 웹 주소 형식이 아닙니다.");
                                 }
+
+
+
+
                             }
                         });
 
@@ -1079,8 +1099,24 @@ public class DeliveryListDetail extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
 
-                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(instUrl));
-                                startActivity(browserIntent);
+                                /*
+                                프로토콜이 없으면 붙이기
+                                URLUtil.guessUrl("url")
+                                올바른 url 형식인지 체크
+                                URLUtil.isValidUrl("url")
+                                프로토콜을 붙이지 않은 상태에서 url 인지 체크 (검색엔진에 사용할지 분기처리할 때 사용)
+                                Patterns.WEB_URL.matcher(url).matches()
+                                */
+
+                                if(URLUtil.isValidUrl(instUrl))
+                                {
+                                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(instUrl));
+                                    startActivity(browserIntent);
+                                }
+                                else
+                                {
+                                    commonHandler.showAlertDialog("웹 주소오류","올바른 웹 주소 형식이 아닙니다.");
+                                }
                             }
 
                         });
