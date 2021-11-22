@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.DeliveryListFragment">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/mainCon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/viewDate"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dlvyDtText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/viewDate"
+            app:layout_constraintEnd_toEndOf="@+id/viewDate"
+            app:layout_constraintStart_toStartOf="@+id/viewDate"
+            app:layout_constraintTop_toTopOf="@+id/viewDate" />
+
+        <ImageView
+            android:id="@+id/downDate"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="17dp"
+            android:src="@drawable/ic_dropdown_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/dlvyDtText"
+            app:layout_constraintStart_toEndOf="@+id/dlvyDtText"
+            app:layout_constraintTop_toTopOf="@+id/dlvyDtText" />
+
+        <TextView
+            android:id="@+id/downText"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="17dp"
+            android:src="@drawable/ic_dropdown_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/dlvyDtText"
+            app:layout_constraintStart_toEndOf="@+id/dlvyDtText"
+            app:layout_constraintTop_toTopOf="@+id/dlvyDtText" />
+
+        <ImageView
+            android:id="@+id/leftMonImg"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:src="@drawable/ic_arrow_month_left"
+            app:layout_constraintBottom_toBottomOf="@+id/viewDate"
+            app:layout_constraintStart_toStartOf="@+id/viewDate"
+            app:layout_constraintTop_toTopOf="@+id/viewDate"
+            android:contentDescription="TODO" />
+
+        <TextView
+            android:id="@+id/leftText"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_arrow_month_left"
+            app:layout_constraintBottom_toBottomOf="@+id/viewDate"
+            app:layout_constraintStart_toStartOf="@+id/viewDate"
+            app:layout_constraintTop_toTopOf="@+id/viewDate" />
+
+        <ImageView
+            android:id="@+id/rightMonImg"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="7dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_arrow_month_right"
+            app:layout_constraintBottom_toBottomOf="@+id/viewDate"
+            app:layout_constraintEnd_toEndOf="@+id/viewDate"
+            app:layout_constraintTop_toTopOf="@+id/viewDate" />
+
+        <TextView
+            android:id="@+id/rightText"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_arrow_month_right"
+            app:layout_constraintBottom_toBottomOf="@+id/viewDate"
+            app:layout_constraintEnd_toEndOf="@+id/viewDate"
+            app:layout_constraintTop_toTopOf="@+id/viewDate" />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#f2f3f6"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:scrollbarDefaultDelayBeforeFade="1000"
+            android:scrollbarFadeDuration="500"
+            android:scrollbarSize="2dp"
+            android:scrollbarStyle="insideInset"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewDate">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:scrollbarAlwaysDrawHorizontalTrack="false"
+                android:scrollbarAlwaysDrawVerticalTrack="false"
+                android:scrollbarSize="0dp">
+
+                <Button
+                    android:id="@+id/dBtn01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/rounded_delivery_btn01_01"
+                    android:text="전체"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/dBtn02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/rounded_delivery_btn01_01"
+                    android:text="배송중"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/dBtn03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/rounded_delivery_btn01_01"
+                    android:text="미완료"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/dBtn04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/rounded_delivery_btn04_01"
+                    android:text="미마감"
+                    android:textAlignment="center"
+                    android:textColor="#D50000"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/dBtn05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/rounded_delivery_btn01_01"
+                    android:text="배송완료"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <ImageView
+            android:id="@+id/noResultImg"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="120dp"
+            android:src="@drawable/ic_empty_list"
+            app:layout_constraintEnd_toEndOf="@id/viewDate"
+            app:layout_constraintStart_toEndOf="@id/viewDate"
+            app:layout_constraintStart_toStartOf="@id/viewDate"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+        <TextView
+            android:id="@+id/noResultText"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="8dp"
+            android:text="조회내역이 없습니다."
+            android:textAlignment="center"
+            android:textColor="#888888"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/noResultImg" />
+
+        <ListView
+            android:id="@+id/deliverylistview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+            app:layout_constraintVertical_bias="0.0">
+
+
+        </ListView>
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/fListProgress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/view3"
+            app:layout_constraintEnd_toEndOf="@+id/view3"
+            app:layout_constraintStart_toStartOf="@+id/view3"
+            app:layout_constraintTop_toTopOf="@+id/view3" />
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

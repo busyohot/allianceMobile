@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/f8f9fb"
+    tools:context=".activity.YesCmplActivity">
+
+
+    <View
+        android:id="@+id/yesPicAddView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/rounded_gray"
+        android:visibility="gone"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="94dp" />
+
+    <View
+        android:id="@+id/yesCmplTopView"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/yesCmplBack"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="@+id/yesCmplTopView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/yesCmplTopView"
+        app:srcCompat="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/yesCmplTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="[배송완료]진행"
+        android:textAlignment="center"
+        android:textColor="#111111"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/yesCmplTopView"
+        app:layout_constraintEnd_toEndOf="@+id/yesCmplTopView"
+        app:layout_constraintStart_toStartOf="@+id/yesCmplTopView"
+        app:layout_constraintTop_toTopOf="@+id/yesCmplTopView" />
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/yesNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/yesView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yesCmplTopView">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/yesTextView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="현장사진"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/yesTextView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="24dp"
+                android:text="(최대 6장)"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toEndOf="@+id/yesTextView9"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/yesTextView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="(선택)"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/yesTextView13"
+                app:layout_constraintStart_toEndOf="@+id/yesTextView13" />
+
+            <ImageView
+                android:id="@+id/yesPicAddImg01"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_gray_detail_white_btn"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toStartOf="@+id/yesPicAddImg02"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesTextView9"
+                app:srcCompat="@mipmap/ic_camera" />
+
+            <ImageView
+                android:id="@+id/yesPicAddImg04"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_gray_detail_white_btn"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toStartOf="@+id/yesPicAddImg05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddImg01"
+                app:srcCompat="@mipmap/ic_camera" />
+
+            <ImageView
+                android:id="@+id/yesPicAddImg05"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_gray_detail_white_btn"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toStartOf="@+id/yesPicAddImg06"
+                app:layout_constraintStart_toEndOf="@+id/yesPicAddImg04"
+                app:layout_constraintTop_toTopOf="@+id/yesPicAddImg04"
+                app:srcCompat="@mipmap/ic_camera" />
+
+            <ImageView
+                android:id="@+id/yesPicAddImg06"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/rounded_gray_detail_white_btn"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/yesPicAddImg05"
+                app:layout_constraintTop_toTopOf="@+id/yesPicAddImg05"
+                app:srcCompat="@mipmap/ic_camera" />
+
+            <ImageView
+                android:id="@+id/yesPicAddImg02"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_gray_detail_white_btn"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toStartOf="@+id/yesPicAddImg03"
+                app:layout_constraintStart_toEndOf="@+id/yesPicAddImg01"
+                app:layout_constraintTop_toTopOf="@+id/yesPicAddImg01"
+                app:srcCompat="@mipmap/ic_camera" />
+
+            <ImageView
+                android:id="@+id/yesPicAddImg03"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/rounded_gray_detail_white_btn"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/yesPicAddImg02"
+                app:layout_constraintTop_toTopOf="@+id/yesPicAddImg02"
+                app:srcCompat="@mipmap/ic_camera" />
+
+            <TextView
+                android:id="@+id/yesPicAddUri01"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="160dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddImg01" />
+
+            <TextView
+                android:id="@+id/yesPicAddUri02"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddUri01" />
+
+            <TextView
+                android:id="@+id/yesPicAddUri03"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddUri02" />
+
+            <TextView
+                android:id="@+id/yesPicAddUri04"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddUri03" />
+
+            <TextView
+                android:id="@+id/yesPicAddUri05"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddUri04" />
+
+            <TextView
+                android:id="@+id/yesPicAddUri06"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddUri05" />
+
+            <TextView
+                android:id="@+id/yesPicFileName01"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="160dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddImg01" />
+
+            <TextView
+                android:id="@+id/yesPicFileName02"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddUri01" />
+
+            <TextView
+                android:id="@+id/yesPicFileName03"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddUri02" />
+
+            <TextView
+                android:id="@+id/yesPicFileName04"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddUri03" />
+
+            <TextView
+                android:id="@+id/yesPicFileName05"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddUri04" />
+
+            <TextView
+                android:id="@+id/yesPicFileName06"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddUri05" />
+
+            <TextView
+                android:id="@+id/yesTextView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="특이사항 선택"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddImg04" />
+
+
+            <TableLayout
+                android:id="@+id/yesCmplTable"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesTextView13" />
+
+            <TextView
+                android:id="@+id/yesTextView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="메모"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesCmplTable" />
+
+            <EditText
+                android:id="@+id/yesCmplMemo"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_gray_detail_white_btn"
+                android:gravity="top"
+                android:hint="내용을 입력하세요."
+                android:inputType="textMultiLine"
+                android:maxLength="50"
+                android:padding="5dp"
+                android:scrollHorizontally="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesTextView15" />
+
+            <TextView
+                android:id="@+id/yesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="48dp"
+                android:text="고객서명"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesCmplMemo" />
+
+
+            <com.github.gcacace.signaturepad.views.SignaturePad
+                android:id="@+id/yesSignaturePad"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/rounded_gray_detail_white_btn"
+                android:saveEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesTextView" />
+
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/rounded_blue_button"
+                android:text="서명완료"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/clearButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesSignaturePad" />
+
+            <Button
+                android:id="@+id/clearButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/rounded_gray_detail_white_btn"
+                android:text="초기화"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/saveButton"
+                app:layout_constraintTop_toBottomOf="@+id/yesSignaturePad" />
+
+            <RadioGroup
+                android:id="@+id/yesCmplReasonGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yesTextView13">
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/signUri"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/saveButton" />
+
+            <TextView
+                android:id="@+id/signFleName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/signUri" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전면 사진"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/yesPicAddImg01"
+                app:layout_constraintStart_toStartOf="@+id/yesPicAddImg01"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddImg01" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="후면 사진"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/yesPicAddImg04"
+                app:layout_constraintStart_toStartOf="@+id/yesPicAddImg04"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddImg04" />
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전체사진"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/yesPicAddImg05"
+                app:layout_constraintStart_toStartOf="@+id/yesPicAddImg05"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddImg05" />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시리얼번호"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/yesPicAddImg06"
+                app:layout_constraintStart_toStartOf="@+id/yesPicAddImg06"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddImg06" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="측면 (좌)"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/yesPicAddImg02"
+                app:layout_constraintStart_toStartOf="@+id/yesPicAddImg02"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddImg02" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="측면 (우)"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/yesPicAddImg03"
+                app:layout_constraintStart_toStartOf="@+id/yesPicAddImg03"
+                app:layout_constraintTop_toBottomOf="@+id/yesPicAddImg03" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/yesView11"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/yesCmplBtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_blue_button"
+        android:text="배송완료"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/yesView11"
+        app:layout_constraintEnd_toEndOf="@+id/yesView11"
+        app:layout_constraintStart_toStartOf="@+id/yesView11"
+        app:layout_constraintTop_toTopOf="@+id/yesView11" />
+
+    <ProgressBar
+        android:id="@+id/yesCmplProgress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406" />
+
+
+</android.support.constraint.ConstraintLayout>

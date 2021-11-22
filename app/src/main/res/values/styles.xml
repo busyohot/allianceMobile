@@ -1,0 +1,38 @@
+<resources>
+    <style name="Widget.Theme.Alliance.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="Widget.Theme.Alliance.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+
+<!--    <style name="AlertDialogTheme" parent="android:Theme.Dialog">
+
+        <item name="android:textSize">16sp</item>
+
+    </style>-->
+
+    <style name="deliverySelectNoStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--<item name="colorAccent">#FFCC00</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:background">#03A9F4</item>-->
+        <item name="android:textSize">26dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+
+    <style name="deliverySelectNoTitleStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--<item name="colorAccent">#FFCC00</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:background">#03A9F4</item>-->
+        <item name="android:textSize">26dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+
+
+</resources>

@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/conTop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DeliveryListDetail">
+
+    <View
+        android:id="@+id/deliveryDetailTopView"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/deliveryDetailBack"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="@+id/deliveryDetailTopView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/deliveryDetailTopView"
+        app:srcCompat="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/deliveryDetailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="배송상세정보"
+        android:textAlignment="center"
+        android:textColor="#111111"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/deliveryDetailTopView"
+        app:layout_constraintEnd_toEndOf="@+id/deliveryDetailTopView"
+        app:layout_constraintStart_toStartOf="@+id/deliveryDetailTopView"
+        app:layout_constraintTop_toTopOf="@+id/deliveryDetailTopView" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/deliveryBtnArea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deliveryDetailTopView"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/con"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/dekiveryDetailTitleBack"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="#999fb6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/deliveryDetailState01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="배송상태"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/dekiveryDetailTitleBack"
+                app:layout_constraintStart_toStartOf="@id/dekiveryDetailTitleBack"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/deliveryDetailState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="배송 기사확정"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/dekiveryDetailTitleBack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/deliveryDetailCustomView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/rounded_gray"
+                app:layout_constraintBottom_toBottomOf="@id/deliveryDetailMsg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dekiveryDetailTitleBack"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="1dp"
+                android:background="#2962FF"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="@+id/deliveryDetailHp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/deliveryDetailHp"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailHp" />
+
+            <TextView
+                android:id="@+id/detailTelCnt"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="2dp"
+                android:background="@drawable/rounded_round_gray_button"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/deliveryDetailHp"
+                app:layout_constraintTop_toTopOf="@+id/deliveryDetailHp" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailName"
+                app:srcCompat="@android:drawable/ic_menu_call"
+                tools:layout_editor_absoluteX="262dp" />
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp"
+                android:text="수령인"
+                android:textColor="#888888"
+                app:layout_constraintStart_toStartOf="@+id/deliveryDetailCustomView"
+                app:layout_constraintTop_toTopOf="@+id/deliveryDetailCustomView" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="연락처"
+                android:textColor="#888888"
+                app:layout_constraintStart_toStartOf="@+id/deliveryDetailCustomView"
+                app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="배송 요청사항"
+                android:textColor="#888888"
+                app:layout_constraintStart_toStartOf="@+id/deliveryDetailCustomView"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailAddr2" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="주소"
+                android:textColor="#888888"
+                app:layout_constraintStart_toStartOf="@+id/deliveryDetailCustomView"
+                app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+            <ImageView
+                android:id="@+id/detailMap"
+                android:layout_width="50dp"
+                android:layout_height="24dp"
+                app:layout_constraintStart_toEndOf="@+id/textView42"
+                app:layout_constraintTop_toTopOf="@+id/textView42"
+                app:srcCompat="@drawable/btn_viewmap" />
+
+            <TextView
+                android:id="@+id/deliveryDetailName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="76dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="홍길동"
+                android:textColor="#111111"
+                app:layout_constraintEnd_toEndOf="@+id/deliveryDetailCustomView"
+                app:layout_constraintStart_toStartOf="@+id/deliveryDetailCustomView"
+                app:layout_constraintTop_toTopOf="@+id/deliveryDetailCustomView" />
+
+            <TextView
+                android:id="@+id/deliveryDetailHp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="76dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="010-0000-0000"
+                android:textColor="#2962ff"
+                app:layout_constraintStart_toStartOf="@+id/deliveryDetailCustomView"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailName" />
+
+            <TextView
+                android:id="@+id/deliveryDetailAddr1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="8"
+                android:text="서울시 서대문구 홍제동"
+                android:textColor="#111111"
+                app:layout_constraintEnd_toEndOf="@+id/deliveryDetailCustomView"
+                app:layout_constraintStart_toStartOf="@+id/deliveryDetailCustomView"
+                app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+            <TextView
+                android:id="@+id/deliveryDetailAddr2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="8"
+                android:text="문화촌 현대아파트 102동 702호"
+                android:textColor="#111111"
+                app:layout_constraintEnd_toEndOf="@+id/deliveryDetailCustomView"
+                app:layout_constraintStart_toStartOf="@+id/deliveryDetailAddr1"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailAddr1" />
+
+            <TextView
+                android:id="@+id/deliveryDetailMsg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="6"
+                android:paddingBottom="20dp"
+                android:text="2021.08.21 4시 이후수령가능. 알림톡 발송요청"
+                android:textColor="#ff4600"
+                app:layout_constraintEnd_toEndOf="@+id/deliveryDetailCustomView"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <View
+                android:id="@+id/deliveryDetailCustomView2"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/rounded_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailCustomView" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="21dp"
+                android:text="고객요청"
+                android:textColor="#888888"
+                app:layout_constraintStart_toStartOf="@+id/deliveryDetailCustomView2"
+                app:layout_constraintTop_toTopOf="@+id/deliveryDetailCustomView2" />
+
+            <Button
+                android:id="@+id/deliveryCancleBtn"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="76dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_gray_detail_btn"
+                android:text="배송 취소"
+                android:textColor="@color/gray_808080"
+                app:layout_constraintBottom_toBottomOf="@+id/deliveryDetailCustomView2"
+                app:layout_constraintEnd_toStartOf="@+id/deliveryDelayBtn"
+                app:layout_constraintStart_toStartOf="@+id/deliveryDetailCustomView2"
+                app:layout_constraintTop_toTopOf="@+id/deliveryDetailCustomView2" />
+
+            <Button
+                android:id="@+id/deliveryDelayBtn"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/rounded_gray_detail_btn"
+                android:text="배송 연기"
+                android:textColor="@color/gray_808080"
+                app:layout_constraintBottom_toBottomOf="@+id/deliveryDetailCustomView2"
+                app:layout_constraintEnd_toEndOf="@+id/deliveryDetailCustomView2"
+                app:layout_constraintStart_toEndOf="@+id/deliveryCancleBtn"
+                app:layout_constraintTop_toTopOf="@+id/deliveryDetailCustomView2" />
+
+            <Button
+                android:id="@+id/deliveryArmBtn"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rounded_blue_button"
+                android:text="알림톡발송"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/deliveryNoCmpllBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailCustomView2" />
+
+            <Button
+                android:id="@+id/deliverylRightLiftBtn"
+                android:layout_width="80dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/rounded_blue_button"
+                android:text="상차"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+            <Button
+                android:id="@+id/deliverylRightLiftClose"
+                android:layout_width="80dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/rounded_blue_button"
+                android:text="닫기"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+            <Button
+                android:id="@+id/deliveryNoCmpllBtn"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rounded_blue_button"
+                android:text="미마감"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/deliveryCmplBtn"
+                app:layout_constraintStart_toEndOf="@+id/deliveryArmBtn"
+                app:layout_constraintTop_toTopOf="@+id/deliveryArmBtn" />
+
+            <Button
+                android:id="@+id/deliveryCmplBtn"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/rounded_blue_button"
+                android:text="배송완료"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/deliveryNoCmpllBtn"
+                app:layout_constraintTop_toTopOf="@+id/deliveryNoCmpllBtn" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="20dp"
+                android:background="#f8f9fb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryArmBtn" />
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="wrap_content"
+                android:layout_height="19sp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="구분"
+                android:textColor="#888888"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView46" />
+
+            <TextView
+                android:id="@+id/textView47"
+                android:layout_width="wrap_content"
+                android:layout_height="19sp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="오더번호"
+                android:textColor="#888888"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="19sp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="배송일"
+                android:textColor="#888888"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+            <TextView
+                android:id="@+id/textView48"
+                android:layout_width="wrap_content"
+                android:layout_height="19sp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="착불비"
+                android:textColor="#888888"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:text="체크하지 않은 상품은 "
+                android:textColor="#666666"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView49" />
+
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginTop="12dp"
+                android:text="처리 됩니다."
+                android:textColor="#666666"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/textView51"
+                app:layout_constraintTop_toBottomOf="@+id/textView49" />
+
+            <TextView
+                android:id="@+id/textView51"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginTop="12dp"
+                android:text="[미상차]"
+                android:textColor="#e58913"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/textView50"
+                app:layout_constraintTop_toBottomOf="@+id/textView49" />
+
+            <TextView
+                android:id="@+id/deliveryDetailSoNo"
+                android:layout_width="0dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="96dp"
+                android:layout_marginEnd="19dp"
+                android:text="99900123456"
+                android:textColor="#111111"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView47" />
+
+            <TextView
+                android:id="@+id/deliveryDetailInstDt"
+                android:layout_width="0dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="96dp"
+                android:layout_marginEnd="19dp"
+                android:textColor="#111111"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView25" />
+
+            <TextView
+                android:id="@+id/deliveryDetailRcptCost"
+                android:layout_width="0dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="96dp"
+                android:layout_marginEnd="19dp"
+                android:text="3,500 원"
+                android:textColor="#111111"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView48" />
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="20dp"
+                android:background="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="오더정보"
+                android:textColor="#111111"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/textView44"
+                app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="20dp"
+                android:text="배송할 상품을 선택해주세요."
+                android:textColor="#111111"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView48" />
+
+            <ImageView
+                android:id="@+id/deliveryDetailImg01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView46"
+                app:srcCompat="@drawable/badge_1_1" />
+
+            <ImageView
+                android:id="@+id/deliveryDetailImg02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/deliveryDetailImg01"
+                app:layout_constraintTop_toBottomOf="@+id/textView46"
+                app:srcCompat="@drawable/badge_1_1" />
+
+            <ImageView
+                android:id="@+id/deliveryDetailImg03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/deliveryDetailImg02"
+                app:layout_constraintTop_toBottomOf="@+id/textView46"
+                app:srcCompat="@drawable/badge_2_1" />
+
+            <ImageView
+                android:id="@+id/deliveryDetailImg04"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+
+                android:layout_marginTop="6dp"
+                app:layout_constraintStart_toEndOf="@+id/deliveryDetailImg03"
+                app:layout_constraintTop_toBottomOf="@+id/textView46"
+                app:srcCompat="@drawable/badge_3_1" />
+
+            <TextView
+                android:id="@+id/deliveryDetailInstMobileMId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="instMobileMId"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/textView45"
+                app:layout_constraintTop_toTopOf="@+id/textView45" />
+
+            <TextView
+                android:id="@+id/deliveryDetailInstMobileDId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:text="instMobileDId"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/deliveryDetailInstMobileMId"
+                app:layout_constraintTop_toTopOf="@+id/textView45" />
+
+            <TableLayout
+                android:id="@+id/detailTablelayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView53">
+
+
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/textView46"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:background="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+            <TextView
+                android:id="@+id/textView54"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="46dp"
+                android:layout_marginEnd="20dp"
+                android:background="#ebebeb  "
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/sendTalkView"
+                app:layout_constraintStart_toStartOf="@+id/sendTalkView"
+                app:layout_constraintTop_toTopOf="@+id/sendTalkView"
+                app:srcCompat="@mipmap/ic_tack_240" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="알림톡발송"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/sendTalkView"
+                app:layout_constraintEnd_toEndOf="@+id/sendTalkView"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/sendTalkView" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="문자메세지"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/sendSmsView"
+                app:layout_constraintEnd_toEndOf="@+id/sendSmsView"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="@+id/sendSmsView" />
+
+            <View
+                android:id="@+id/sendTalkView"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rounded_gray"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/sendSmsView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailCustomView2" />
+
+            <View
+                android:id="@+id/sendSmsView"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/rounded_gray"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sendTalkView"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDetailCustomView2" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/sendSmsView"
+                app:layout_constraintStart_toStartOf="@+id/sendSmsView"
+                app:layout_constraintTop_toTopOf="@+id/sendSmsView"
+                app:srcCompat="@drawable/ic_message" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="9dp"
+                android:layout_height="10dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/detailMap"
+                app:layout_constraintStart_toEndOf="@+id/textView42"
+                app:layout_constraintTop_toTopOf="@+id/detailMap" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/deliveryBtnArea"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/deliveryDetailLiftBtn"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded_delivery_lift_01_02"
+        android:text="상차 완료"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/deliveryDetailLiftCancelBtn"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded_gray_detail_btn"
+        android:text="상차 취소"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/deliveryBtnArea" />
+
+    <ProgressBar
+        android:id="@+id/activity_delivery_list_detail_progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406" />
+</android.support.constraint.ConstraintLayout>

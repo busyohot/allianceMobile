@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.ChangeTruckFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/barCodeProgress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/barImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:src="@drawable/ic_barcode"
+            app:layout_constraintEnd_toEndOf="@+id/barBtn"
+            app:layout_constraintStart_toStartOf="@+id/barBtn"
+            app:layout_constraintTop_toTopOf="@+id/barBtn" />
+
+        <TextView
+            android:id="@+id/barText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="바코드 스캔"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/barBtn"
+            app:layout_constraintStart_toStartOf="@+id/barBtn"
+            app:layout_constraintTop_toBottomOf="@+id/barImg" />
+
+        <Button
+            android:id="@+id/barBtn"
+            android:layout_width="0dp"
+            android:layout_height="202dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="22dp"
+            android:background="@drawable/rounded_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/bluBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/bluBtn"
+            android:layout_width="0dp"
+            android:layout_height="202dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="22dp"
+            android:background="@drawable/rounded_gray"
+            app:layout_constraintEnd_toStartOf="@+id/barBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/blueImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="46dp"
+            android:src="@drawable/ic_bluetooth"
+            app:layout_constraintEnd_toEndOf="@+id/bluBtn"
+            app:layout_constraintStart_toStartOf="@+id/bluBtn"
+            app:layout_constraintTop_toTopOf="@+id/bluBtn" />
+
+        <TextView
+            android:id="@+id/blueText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="블루투스 연결"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/bluBtn"
+            app:layout_constraintStart_toStartOf="@+id/bluBtn"
+            app:layout_constraintTop_toBottomOf="@+id/blueImg" />
+
+
+        <EditText
+            android:id="@+id/soNoScan"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="22dp"
+
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="11dp"
+            android:background="@drawable/rounded_gray"
+            android:ems="10"
+            android:hint="바코드 숫자 입력"
+
+            android:inputType="textPersonName"
+            android:paddingLeft="16dp"
+            android:paddingTop="14dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="14dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toStartOf="@+id/soNoInputBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barBtn" />
+
+        <Button
+            android:id="@+id/soNoInputBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginEnd="22dp"
+            android:background="@drawable/rounded_blue_button"
+            android:text="전송"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/soNoScan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/soNoScan"
+            app:layout_constraintTop_toTopOf="@+id/soNoScan" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

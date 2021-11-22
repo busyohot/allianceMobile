@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.Mobile002Activity">
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+
+
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/listSeqBtn"
+        android:layout_width="60dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        android:alpha="0"
+        app:layout_constraintStart_toEndOf="@+id/listleftBar"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/listSeq"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="88"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/listleftBar"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/listState"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginEnd="16dp"
+        android:text="배송 기사 확정"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/listSeq" />
+
+    <TextView
+        android:id="@+id/listleftBar"
+        android:layout_width="6dp"
+        android:layout_height="0dp"
+        android:background="#D50000"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/deliveryDetailImg01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/listleftBar"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/deliveryDetailImg02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/deliveryDetailImg01"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/deliveryDetailImg03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/deliveryDetailImg02"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/deliveryDetailImg04"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintStart_toEndOf="@+id/deliveryDetailImg03"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/listSoNo"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="52dp"
+        android:text=""
+        android:textAlignment="viewStart"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/listleftBar"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/listName"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="52dp"
+        android:text=""
+        android:textAlignment="viewStart"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/listSoNo"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/listAddr1"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="21dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text=""
+        app:layout_constraintEnd_toStartOf="@+id/listDetail"
+        app:layout_constraintStart_toEndOf="@+id/listleftBar"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/listAddr2"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="21dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text=""
+        app:layout_constraintEnd_toStartOf="@+id/listDetail"
+        app:layout_constraintStart_toEndOf="@+id/listleftBar"
+        app:layout_constraintTop_toBottomOf="@+id/listAddr1" />
+
+    <TextView
+        android:id="@+id/listHp"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="20dp"
+        android:text="00000000000"
+        android:textAlignment="viewStart"
+        android:textColor="#2962FF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/listleftBar" />
+
+    <ImageView
+        android:id="@+id/listDetail"
+        android:layout_width="16dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:srcCompat="@drawable/ic_arrow" />
+
+    <ImageView
+        android:id="@+id/listDownImg"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/listSeq"
+        app:layout_constraintStart_toEndOf="@+id/listSeq"
+        app:layout_constraintTop_toTopOf="@+id/listSeq"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_dropdown_number_arrow" />
+
+    <ImageView
+        android:id="@+id/listMap"
+        android:layout_width="59dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/listTelCnt"
+        app:srcCompat="@drawable/btn_viewmap" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:background="#f2f3f6"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/tblUserMId"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginTop="72dp"
+        android:textColor="#000000"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/listleftBar"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/instMobileMId"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="#000000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/tblUserMId" />
+
+    <TextView
+        android:id="@+id/listTelCnt"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="2dp"
+        android:background="@drawable/rounded_round_gray_button"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/textView20"
+        app:layout_constraintStart_toEndOf="@+id/listHp"
+        app:layout_constraintTop_toTopOf="@+id/listHp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:visibility="invisible"
+        app:srcCompat="@android:drawable/ic_menu_call"
+        tools:layout_editor_absoluteX="234dp"
+        tools:layout_editor_absoluteY="130dp" />
+
+    <ProgressBar
+        android:id="@+id/list_progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="114dp"
+        android:layout_height="114dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="1dp"
+        android:background="#2962FF"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/listHp"
+        app:layout_constraintStart_toStartOf="@+id/listHp"
+        app:layout_constraintTop_toBottomOf="@+id/listHp" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="12dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="47dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/listMap"
+        app:layout_constraintEnd_toEndOf="@+id/listMap"
+        app:layout_constraintTop_toTopOf="@+id/listMap"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/selNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/listleftBar"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+</android.support.constraint.ConstraintLayout>

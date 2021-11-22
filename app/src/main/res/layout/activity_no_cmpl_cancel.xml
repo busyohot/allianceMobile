@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/f8f9fb"
+    tools:context=".activity.NoCmplCancelActivity">
+
+
+    <View
+        android:id="@+id/picAddViewCancel"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/rounded_gray"
+        android:visibility="gone"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="94dp" />
+
+    <View
+        android:id="@+id/noCmplTopViewCancel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/noCmplBackCancel"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="@+id/noCmplTopViewCancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/noCmplTopViewCancel"
+        app:srcCompat="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/noCmplTitleCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="[미마감]정보 및 취소"
+        android:textAlignment="center"
+        android:textColor="#111111"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/noCmplTopViewCancel"
+        app:layout_constraintEnd_toEndOf="@+id/noCmplTopViewCancel"
+        app:layout_constraintStart_toStartOf="@+id/noCmplTopViewCancel"
+        app:layout_constraintTop_toTopOf="@+id/noCmplTopViewCancel" />
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/navigationViewCancel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/view11Cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noCmplTopViewCancel">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView9Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="현장사진"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView11Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="24dp"
+                android:text="(최대 6장)"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/textView9Cancel"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView14Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="선택"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/textView13Cancel"
+                app:layout_constraintTop_toTopOf="@+id/textView13Cancel" />
+
+            <ImageView
+                android:id="@+id/picAddImg01Cancel"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_gray"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toStartOf="@+id/picAddImg02Cancel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9Cancel" />
+
+            <ImageView
+                android:id="@+id/picAddImg04Cancel"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_gray"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toStartOf="@+id/picAddImg05Cancel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddImg01Cancel" />
+
+            <ImageView
+                android:id="@+id/picAddImg05Cancel"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_gray"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toStartOf="@+id/picAddImg06Cancel"
+                app:layout_constraintStart_toEndOf="@+id/picAddImg04Cancel"
+                app:layout_constraintTop_toTopOf="@+id/picAddImg04Cancel" />
+
+            <ImageView
+                android:id="@+id/picAddImg06Cancel"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/rounded_gray"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/picAddImg05Cancel"
+                app:layout_constraintTop_toTopOf="@+id/picAddImg05Cancel" />
+
+            <ImageView
+                android:id="@+id/picAddImg02Cancel"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_gray"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toStartOf="@+id/picAddImg03Cancel"
+                app:layout_constraintStart_toEndOf="@+id/picAddImg01Cancel"
+                app:layout_constraintTop_toTopOf="@+id/picAddImg01Cancel" />
+
+            <ImageView
+                android:id="@+id/picAddImg03Cancel"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/rounded_gray"
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/picAddImg02Cancel"
+                app:layout_constraintTop_toTopOf="@+id/picAddImg02Cancel" />
+
+            <TextView
+                android:id="@+id/picAddUri01Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="160dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddImg01Cancel" />
+
+            <TextView
+                android:id="@+id/picAddUri02Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddUri01Cancel" />
+
+            <TextView
+                android:id="@+id/picAddUri03Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddUri02Cancel" />
+
+            <TextView
+                android:id="@+id/picAddUri04Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddUri03Cancel" />
+
+            <TextView
+                android:id="@+id/picAddUri05Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddUri04Cancel" />
+
+            <TextView
+                android:id="@+id/picAddUri06Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddUri05Cancel" />
+
+            <TextView
+                android:id="@+id/picFileName01Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="160dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddImg01Cancel" />
+
+            <TextView
+                android:id="@+id/picFileName02Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddUri01Cancel" />
+
+            <TextView
+                android:id="@+id/picFileName03Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddUri02Cancel" />
+
+            <TextView
+                android:id="@+id/picFileName04Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddUri03Cancel" />
+
+            <TextView
+                android:id="@+id/picFileName05Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddUri04Cancel" />
+
+            <TextView
+                android:id="@+id/picFileName06Cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddUri05Cancel" />
+
+            <TextView
+                android:id="@+id/textView13Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="미마감 사유"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddImg04Cancel" />
+
+            <Button
+                android:id="@+id/sendFileFtpCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:text="전송"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picAddImg05Cancel" />
+
+            <TableLayout
+                android:id="@+id/noCmplTableCancel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13Cancel" />
+
+            <TextView
+                android:id="@+id/textView15Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="메모"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noCmplTableCancel" />
+
+            <TextView
+                android:id="@+id/noCmplMemoCancel"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_gray_detail_white_btn"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:maxLength="50"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                android:scrollHorizontally="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15Cancel" />
+
+            <TextView
+                android:id="@+id/noCancelTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="48dp"
+                android:text="고객서명"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noCmplMemoCancel" />
+
+            <ImageView
+                android:id="@+id/noSignatureCancelPad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="23dp"
+                android:background="@drawable/rounded_gray_detail_white_btn"
+
+                android:paddingLeft="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noCancelTextView2" />
+            <RadioGroup
+                android:id="@+id/noCmplReasonGroupCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13Cancel">
+
+            </RadioGroup>
+            <TextView
+                android:id="@+id/noSignCancelUri"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_gray_detail_btn"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noSignatureCancelPad" />
+
+            <TextView
+                android:id="@+id/noSignCancelFileName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noSignCancelUri" />
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전체사진"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/picAddImg01Cancel"
+                app:layout_constraintStart_toStartOf="@+id/picAddImg01Cancel"
+                app:layout_constraintTop_toBottomOf="@+id/picAddImg01Cancel" />
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="하자부위"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/picAddImg02Cancel"
+                app:layout_constraintStart_toStartOf="@+id/picAddImg02Cancel"
+                app:layout_constraintTop_toBottomOf="@+id/picAddImg02Cancel" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="하자부위(근접)"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/picAddImg03Cancel"
+                app:layout_constraintStart_toStartOf="@+id/picAddImg03Cancel"
+                app:layout_constraintTop_toBottomOf="@+id/picAddImg03Cancel" />
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="개포상태(박스)"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/picAddImg04Cancel"
+                app:layout_constraintStart_toStartOf="@+id/picAddImg04Cancel"
+                app:layout_constraintTop_toBottomOf="@+id/picAddImg04Cancel" />
+
+            <TextView
+                android:id="@+id/textView56"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시리얼번호"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/picAddImg05Cancel"
+                app:layout_constraintStart_toStartOf="@+id/picAddImg05Cancel"
+                app:layout_constraintTop_toBottomOf="@+id/picAddImg05Cancel" />
+
+            <TextView
+                android:id="@+id/textView57"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기타"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/picAddImg06Cancel"
+                app:layout_constraintStart_toStartOf="@+id/picAddImg06Cancel"
+                app:layout_constraintTop_toBottomOf="@+id/picAddImg06Cancel" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <View
+        android:id="@+id/view11Cancel"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/noCmplBtnCancel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_blue_button_2_gray"
+        android:text="미마감 취소"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/view11Cancel"
+        app:layout_constraintEnd_toEndOf="@+id/view11Cancel"
+        app:layout_constraintStart_toStartOf="@+id/view11Cancel"
+        app:layout_constraintTop_toTopOf="@+id/view11Cancel" />
+
+    <ProgressBar
+        android:id="@+id/noCmplProgressCancel"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406" />
+
+
+</android.support.constraint.ConstraintLayout>
