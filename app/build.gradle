@@ -4,14 +4,14 @@ plugins {
 
 android {
     //compileSdk 31
-    compileSdkVersion 28
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.mobile.alliance"
         minSdk 23
         //targetSdk 31
-        targetSdkVersion 28
+        targetSdkVersion 31
         versionCode 1
-        versionName '0.1.0'
+        versionName '0.1.1'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         minSdkVersion 23
@@ -35,16 +35,21 @@ android {
 
 dependencies {
 
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    //noinspection GradleCompatible
     implementation 'com.android.support:recyclerview-v7:28.0.0'
+    //noinspection GradleCompatible
     implementation 'com.android.support:design:28.0.0'
+    //noinspection GradleCompatible
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'
     implementation 'android.arch.navigation:navigation-ui:1.0.0'
     implementation files('libs\\ftp4j-1.7.2.jar')
 
     testImplementation 'junit:junit:4.13.2'
+    //noinspection GradleCompatible
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
 
     compileOnly 'org.projectlombok:lombok:1.18.22'
