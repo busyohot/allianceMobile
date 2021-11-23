@@ -248,34 +248,62 @@ public class FirstActivity extends AppCompatActivity {
 
                     if(result.getRtnYn().equals("Y")) {
 
+                        if(result.getMobileGrntCd() != null && !result.getMobileGrntCd().equals("")) {
+                            //내부저장소에 값 넣기
+                            editor.putBoolean("isShare", true); //저장할때 true // 수정할때 flase
 
-                        //내부저장소에 값 넣기
-                        editor.putBoolean("isShare", true); //저장할때 true // 수정할때 flase
+                            editor.putString("cmpyCd", result.getCmpyCd());
+                            editor.putString("cmpyNm", result.getCmpyNm());
+                            editor.putString("userId", result.getUserId());
+                            editor.putString("userName", result.getUserName());
+                            editor.putString("userGrntCd", result.getUserGrntCd());
+                            editor.putString("userGrntNm", result.getUserGrntNm());
+                            editor.putString("userGrdCd", result.getUserGrdCd());
+                            editor.putString("userGrdNm", result.getUserGrdNm());
+                            editor.putString("dcCd", result.getDcCd());
+                            editor.putString("dcNm", result.getDcNm());
+                            editor.putString("tblUserMId", result.getId());
+                            editor.putString("jsessionId", result.getJsessionId());
+                            editor.putString("loginTime", result.getLoginTime());
+                            editor.putString("mobileGrntCd", result.getMobileGrntCd());
+                            editor.putString("mobileGrntNm", result.getMobileGrntNm());
 
-                        editor.putString("cmpyCd", result.getCmpyCd());
-                        editor.putString("cmpyNm", result.getCmpyNm());
-                        editor.putString("userId", result.getUserId());
-                        editor.putString("userName", result.getUserName());
-                        editor.putString("userGrntCd", result.getUserGrntCd());
-                        editor.putString("userGrntNm", result.getUserGrntNm());
-                        editor.putString("userGrdCd", result.getUserGrdCd());
-                        editor.putString("userGrdNm", result.getUserGrdNm());
-                        editor.putString("dcCd", result.getDcCd());
-                        editor.putString("dcNm", result.getDcNm());
-                        editor.putString("tblUserMId", result.getId());
-                        editor.putString("jsessionId", result.getJsessionId());
-                        editor.putString("loginTime", result.getLoginTime());
-                        editor.putString("mobileGrntCd", result.getMobileGrntCd());
-                        editor.putString("mobileGrntNm", result.getMobileGrntNm());
+                            editor.putInt("interval", 360);  //단위는 분
 
-                        editor.putInt("interval", 360);  //단위는 분
-                        
-                        editor.apply();     //저장종료
+                            editor.apply();     //저장종료
 
-                        if (result.getRtnYn().equals("Y")) {
-                            Intent mobile_001 = new Intent(FirstActivity.this, Mobile001Activity.class);
-                            startActivity(mobile_001);  //다음 액티비티를 열고
-                            FirstActivity.this.finish();     //이 액티비티를 닫음
+                            if (result.getRtnYn().equals("Y")) {
+                                Intent mobile_001 = new Intent(FirstActivity.this, Mobile001Activity.class);
+                                startActivity(mobile_001);  //다음 액티비티를 열고
+                                FirstActivity.this.finish();     //이 액티비티를 닫음
+                            }
+                        }
+                        else
+                        {
+                            //showConfirmDialog("로그인 실패", result.getRtnMsg());
+
+                            View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_success, null);
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(FirstActivity.this);
+                            builder.setView(dialogView);
+
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.setCancelable(false);
+                            alertDialog.show();
+
+                            Button ok_btn = dialogView.findViewById(R.id.successBtn);
+                            TextView ok_txt = dialogView.findViewById(R.id.successText);
+                            ok_txt.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START); //글자를 왼쪽 정렬
+                            ok_txt.setText("로그인에 실패하였습니다.\n모바일 접속권한을 확인하세요.");
+                            ok_btn.setOnClickListener(new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View v) {
+
+                                    alertDialog.dismiss();
+
+                                }
+                            });
                         }
 
                     }
