@@ -29,6 +29,7 @@ import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
@@ -1043,9 +1044,9 @@ public class DeliveryListDetail extends AppCompatActivity {
                         imageViews[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_infoblue));
                         //imageViews[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_info));
 
-                         String prodUrl = (result.get(i).getInstImgPath() == null || result.get(i).getInstImgPath().trim() == "" )  ? "" : result.get(i).getInstUrl();
+                         String prodUrl = (result.get(i).getInstImgPath() == null || result.get(i).getInstImgPath().trim().equals("") )  ? "" : result.get(i).getInstUrl();
 
-                         if(result.get(i).getInstImgPath() == null || result.get(i).getInstImgPath().trim() == "")
+                         if(result.get(i).getInstImgPath() == null || result.get(i).getInstImgPath().trim().equals(""))
                          {
                              imageViews[i].setVisibility(View.INVISIBLE);
                          }
@@ -1089,9 +1090,9 @@ public class DeliveryListDetail extends AppCompatActivity {
                         });
 
 
-                        String instUrl = (result.get(i).getInstUrl() == null || result.get(i).getInstUrl().trim() == "" )  ? "" : result.get(i).getInstUrl();
+                        String instUrl = (result.get(i).getInstUrl() == null || result.get(i).getInstUrl().trim().equals(""))  ? "" : result.get(i).getInstUrl();
 
-                        if(result.get(i).getInstUrl() == null || result.get(i).getInstUrl().trim() == "" )
+                        if(result.get(i).getInstUrl() == null || result.get(i).getInstUrl().trim().equals(""))
                         {
                             playo[i].setVisibility(View.INVISIBLE);
                         }

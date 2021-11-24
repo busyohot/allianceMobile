@@ -1917,7 +1917,7 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
                 , sendComplete
                 , onCreateData.getAlrmTalkUserid()
                 , onCreateData.getMessageType()
-                , sharePref.getString("PhoneNum","")    //onCreateData.getPhn() //알림톡 받는사람 전화번호
+                , onCreateData.getPhn() //알림톡 받는사람 전화번호       //sharePref.getString("PhoneNum","")
                 , onCreateData.getProfile()
                 , "00000000000000"
                 , completeMsg
@@ -1968,7 +1968,7 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
         send.add(new SendTalkVO(
                 onCreateData.getMessageType()                   //알림톡 발송유형
                 //0505hphphphp
-                , sharePref.getString("PhoneNum", "")   //onCreateData.getPhn()   //알림톡 받는사람 전화번호
+                , onCreateData.getPhn()   //알림톡 받는사람 전화번호      //sharePref.getString("PhoneNum", "")
                 , onCreateData.getProfile()                        //알림톡 프로필 아이디
                 , "00000000000000"             //발송시간 0 14개 : 즉시발송
                 , onCreateData.getTmplid()         //알림톡 템플릿아이디

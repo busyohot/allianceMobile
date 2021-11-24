@@ -377,7 +377,7 @@ public class MapActivity extends AppCompatActivity {
                 //marker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 기본으로 제공하는 BluePin 마커 모양.
                 //marker.setSelectedMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
                 //marker.setCustomImageAnchor(0.5f, 1.0f);
-                marker.setAlpha(0.8f);
+                marker.setAlpha(0.9f);
                 if(color.equals("red")){
                     marker.setMarkerType(MapPOIItem.MarkerType.RedPin); // 기본으로 제공하는 BluePin 마커 모양.
                     marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
@@ -549,7 +549,7 @@ marker = new MapPOIItem();
                         marker.setMarkerType(MapPOIItem.MarkerType.RedPin); // 기본으로 제공하는 BluePin 마커 모양.
                         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
 
-                        marker.setAlpha(0.8f);
+                        marker.setAlpha(0.9f);
 
                         // 중심점 변경
                         mapView.setMapCenterPoint(marker.getMapPoint(), true);
@@ -568,7 +568,7 @@ marker = new MapPOIItem();
 
                         marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
                         marker.setSelectedMarkerType(MapPOIItem.MarkerType.BluePin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-                        marker.setAlpha(0.4f);
+                        marker.setAlpha(0.6f);
 
 
                         mapView.addPOIItem(marker);

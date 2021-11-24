@@ -246,8 +246,8 @@ Toast.makeText(this,"유심상태 : " + telManager.getSimState() + "," + telMana
             editor.apply();     //저장종료
 
 
-            Toast toast = Toast.makeText(this, "PhoneNum : " + sharePref.getString("PhoneNum","") + "\nversionCode : " + sharePref.getString("VersionCode","") + "\nversionName : " + sharePref.getString("VersionName","")+"\ndeviceIp : " + sharePref.getString("cnntIp",""), Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER|Gravity.BOTTOM, 0, 0);
+            //Toast toast = Toast.makeText(this, "PhoneNum : " + sharePref.getString("PhoneNum","") + "\nversionCode : " + sharePref.getString("VersionCode","") + "\nversionName : " + sharePref.getString("VersionName","")+"\ndeviceIp : " + sharePref.getString("cnntIp",""), Toast.LENGTH_SHORT);
+            //toast.setGravity(Gravity.CENTER|Gravity.BOTTOM, 0, 0);
             //toast.show();
 
 
