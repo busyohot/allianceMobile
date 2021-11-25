@@ -1649,7 +1649,7 @@ public class DeliveryListDetail extends AppCompatActivity {
             @Override
             public void onFailure(Call<DeliveryVO> call, Throwable t) {
 
-                commonHandler.showAlertDialog("통화 카운트 저장 접속 실패", ""+"접속실패\n" + t.getMessage());
+                commonHandler.showAlertDialog("통화 카운트 저장 접속 실패", "접속실패\n" + t.getMessage());
                 showProgress(false);
             }
         });

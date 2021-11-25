@@ -454,8 +454,8 @@ String completeMsg="";
 
 
                         send.add(new SendTalkVO(
-                                talkMessageType.getText().toString()                    //알림톡 발송유형
-                                //0505hphphphp
+                                    talkMessageType.getText().toString()                    //알림톡 발송유형
+                                    //0505hphphphp
                                 ,   talkPhn.getText().toString()    //알림톡 받는사람 전화번호      // sharePref.getString("PhoneNum","")
                                 ,   talkProfile.getText().toString()                        //알림톡 프로필 아이디
                                 ,   talkReservedt.getText().toString()              //발송시간

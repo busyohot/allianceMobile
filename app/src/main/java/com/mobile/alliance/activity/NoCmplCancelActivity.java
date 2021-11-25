@@ -710,7 +710,7 @@ public class NoCmplCancelActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<NoCmplVO> call, Throwable t) {
-                commonHandler.showToast("미마감 onCreate 데이터 조회 실패\n접속실패\n+t.getMessage()",0,17,17);
+                commonHandler.showToast("미마감 onCreate 데이터 조회 실패\n접속실패\n"+t.getMessage(),0,17,17);
                 showProgress(false);
             }
         });
