@@ -1976,14 +1976,15 @@ public class NoCmplActivity extends AppCompatActivity {
     }
 
     //미마감알림톡 결과를 DB에 저장
-    public void XCmplTalkDb(String sendComplete, String message)
+    public void XCmplTalkDb(String sendComplete, String message, String phn)
     {
         mNoCmplSaveTalk(new NoCmplSaveTalkVO(
                   onCreateData.getInstMobileMId()
                 , sendComplete
                 , onCreateData.getAlrmTalkUserid()
                 , onCreateData.getMessageType()
-                , onCreateData.getPhn() //알림톡 받는사람 전화번호       //sharePref.getString("PhoneNum","")
+                //, onCreateData.getPhn() //알림톡 받는사람 전화번호       //sharePref.getString("PhoneNum","")
+                , phn
                 , onCreateData.getProfile()
                 , "00000000000000"
                 , completeMsg
@@ -2078,12 +2079,21 @@ public class NoCmplActivity extends AppCompatActivity {
 
                     //// 2. 상태값과 상관없이   알림톡을 발송했고 그 결과가 success 일때 (발송 성공일때) 알림톡 발송 내역을 저장(결과코드를 포함하여저장)
                     for(int i=0;i<resultSendTalk.size();i++){
-                        XCmplTalkDb(resultSendTalk.get(i).getCode(), resultSendTalk.get(i).getMessage());
+                        //XCmplTalkDb(resultSendTalk.get(i).getCode(), resultSendTalk.get(i).getMessage());
+
+                        String phoneNumber; //알림톡 받는사람 전화번호
+                        try {
+                            phoneNumber = resultSendTalk.get(i).getData().getPhn();
+                        }
+                        catch(Exception e){
+                            phoneNumber = onCreateData.getPhn();
+                        }
+                        XCmplTalkDb(resultSendTalk.get(i).getCode(), resultSendTalk.get(i).getMessage(), phoneNumber);
                     }
                     //XCmplTalkDb(resultSendTalk.get(0).getCode(), resultSendTalk.get(0).getMessage());
                 }
                 else{
-                    XCmplTalkDb("N","onResponse_noResult");
+                    XCmplTalkDb("N","onResponse_noResult","01000000000");
                 }
                 showProgress(false);
             }
@@ -2091,7 +2101,7 @@ public class NoCmplActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ArrayList<TalkVO>> call, Throwable t) {
 
-                XCmplTalkDb("N","onFailure");
+                XCmplTalkDb("N","onFailure","01000000000");
 
                 showProgress(false);
             }

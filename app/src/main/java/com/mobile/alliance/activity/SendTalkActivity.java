@@ -549,7 +549,9 @@ String completeMsg="";
                 , talkPhn.getText().toString()
                 , talkProfile.getText().toString()
                 , talkReservedt.getText().toString()
-                , talkAlrmTlkMsg.getText().toString()
+                //20211127 정연호 수정 - 고객에게 발송한 그 메세지를 DB에 담게 변경한다
+                //, talkAlrmTlkMsg.getText().toString()
+                , completeMsg
                 , talkTitle.getText().toString()
                 , talkTmplid.getText().toString()
                 , message

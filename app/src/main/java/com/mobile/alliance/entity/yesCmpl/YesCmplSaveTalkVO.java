@@ -51,6 +51,7 @@ public class YesCmplSaveTalkVO extends CommonVO
         this.alrmTlkMsg     =   alrmTlkMsg;
         this.title          =   title;
         this.tmplid         =   tmplid;
+        this.message        =   message;
         this.setSaveUser(saveUser)      		;
     }
 }
