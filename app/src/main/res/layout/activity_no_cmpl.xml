@@ -415,7 +415,7 @@
                 android:gravity="top"
                 android:hint="내용을 입력하세요."
                 android:inputType="textMultiLine"
-                android:maxLength="50"
+                android:maxLength="300"
                 android:paddingLeft="5dp"
                 android:paddingTop="5dp"
                 android:paddingRight="5dp"
