@@ -17,6 +17,10 @@ public class DeliveryListViewItem {
     private Drawable img01;
     private Drawable img02;
     private Drawable img03;
+
+    //20211205 추가
+    private String text03;
+
     private Drawable img04;
     private String state;
     private String soNo;

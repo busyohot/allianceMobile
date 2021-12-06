@@ -48,7 +48,7 @@
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/deliveryBtnArea"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deliveryDetailTopView"
         app:layout_constraintVertical_bias="0.0">
@@ -84,7 +84,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="배송 기사확정"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -201,7 +200,6 @@
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="홍길동"
                 android:textColor="#111111"
                 app:layout_constraintEnd_toEndOf="@+id/deliveryDetailCustomView"
                 app:layout_constraintStart_toStartOf="@+id/deliveryDetailCustomView"
@@ -469,7 +467,6 @@
                 android:layout_height="19dp"
                 android:layout_marginStart="96dp"
                 android:layout_marginEnd="19dp"
-                android:text="99900123456"
                 android:textColor="#111111"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -493,7 +490,6 @@
                 android:layout_height="19dp"
                 android:layout_marginStart="96dp"
                 android:layout_marginEnd="19dp"
-                android:text="3,500 원"
                 android:textColor="#111111"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -545,8 +541,7 @@
                 android:layout_marginStart="96dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView46"
-                app:srcCompat="@drawable/badge_1_1" />
+                app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
             <ImageView
                 android:id="@+id/deliveryDetailImg02"
@@ -555,8 +550,7 @@
 
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toEndOf="@+id/deliveryDetailImg01"
-                app:layout_constraintTop_toBottomOf="@+id/textView46"
-                app:srcCompat="@drawable/badge_1_1" />
+                app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
             <ImageView
                 android:id="@+id/deliveryDetailImg03"
@@ -565,8 +559,18 @@
 
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toEndOf="@+id/deliveryDetailImg02"
-                app:layout_constraintTop_toBottomOf="@+id/textView46"
-                app:srcCompat="@drawable/badge_2_1" />
+                app:layout_constraintTop_toBottomOf="@+id/textView46" />
+
+            <TextView
+                android:id="@+id/deliveryDetailText03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/FFE1AE"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/deliveryDetailImg03"
+                app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
             <ImageView
                 android:id="@+id/deliveryDetailImg04"
@@ -574,9 +578,8 @@
                 android:layout_height="22dp"
 
                 android:layout_marginTop="6dp"
-                app:layout_constraintStart_toEndOf="@+id/deliveryDetailImg03"
-                app:layout_constraintTop_toBottomOf="@+id/textView46"
-                app:srcCompat="@drawable/badge_3_1" />
+                app:layout_constraintStart_toEndOf="@id/deliveryDetailText03"
+                app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
             <TextView
                 android:id="@+id/deliveryDetailInstMobileMId"

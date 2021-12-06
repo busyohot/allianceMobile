@@ -152,6 +152,10 @@ public class DeliveryListViewAdapter extends BaseAdapter {
 
         //listImg03  주문유형 SO_TYPE 일반 반품 교환
         ImageView listImg03 = (ImageView) view.findViewById(R.id.deliveryDetailImg03);
+        
+        //20211205 추가
+        TextView listText03 = (TextView) view.findViewById(R.id.deliveryDetailTextView03);
+        
         //listImg04 1인 / 2인 SEAT_TYPE   시공좌석유형
         ImageView listImg04 = (ImageView) view.findViewById(R.id.deliveryDetailImg04);
 
@@ -257,6 +261,7 @@ public class DeliveryListViewAdapter extends BaseAdapter {
         listImg01.setImageDrawable(deliveryListViewItem.getImg01());
         listImg02.setImageDrawable(deliveryListViewItem.getImg02());
         listImg03.setImageDrawable(deliveryListViewItem.getImg03());
+        listText03.setText(deliveryListViewItem.getText03());   //20211205 추가
         listImg04.setImageDrawable(deliveryListViewItem.getImg04());
         listState.setText(deliveryListViewItem.getState());
         listState.setTextColor(deliveryListViewItem.getColorCode());
@@ -406,6 +411,7 @@ public class DeliveryListViewAdapter extends BaseAdapter {
                         , Drawable image01
                         , Drawable image02
                         , Drawable image03
+                            , String soTypeNm
                         , Drawable image04
                         , String state
                         , String soNo
@@ -424,6 +430,7 @@ public class DeliveryListViewAdapter extends BaseAdapter {
         deliveryListViewItem.setImg01(image01);
         deliveryListViewItem.setImg02(image02);
         deliveryListViewItem.setImg03(image03);
+        deliveryListViewItem.setText03(soTypeNm);
         deliveryListViewItem.setImg04(image04);
         deliveryListViewItem.setState(state);
         deliveryListViewItem.setSoNo(soNo);

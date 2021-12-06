@@ -151,6 +151,10 @@ public class DeliveryListDetail extends AppCompatActivity {
     
     TextView deliveryDetailInstDt;          //배송일(시공일) 표시해주기
     ImageView detailMap;
+
+    //20211205 추가
+    TextView deliveryDetailText03;  //오더유형
+
     String editYn;              //입력 가능한지, 배송일+1일의 10시가 지나서 입력이 불가능 한지를 표시. Y 입력-상차, 미마감,배송완료 등 가능 N 불가능
 
     @Override
@@ -230,6 +234,10 @@ public class DeliveryListDetail extends AppCompatActivity {
         deliveryDetailImg01 = (ImageView) findViewById(R.id.deliveryDetailImg01);
         deliveryDetailImg02 = (ImageView) findViewById(R.id.deliveryDetailImg02);
         deliveryDetailImg03 = (ImageView) findViewById(R.id.deliveryDetailImg03);
+
+        //20211205 추가
+        deliveryDetailText03 = (TextView) findViewById(R.id.deliveryDetailText03);
+
         deliveryDetailImg04 = (ImageView) findViewById(R.id.deliveryDetailImg04);
         deliveryDetailSoNo = (TextView) findViewById(R.id.deliveryDetailSoNo);
         deliveryDetailInstMobileMId = (TextView) findViewById(R.id.deliveryDetailInstMobileMId);
@@ -916,11 +924,19 @@ public class DeliveryListDetail extends AppCompatActivity {
                         deliveryDetailImg03.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.badge_2_2));
                     } else if (result.get(0).getSoType().equals("2000")) {
                         deliveryDetailImg03.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.badge_2_3));
-                    } else if (result.get(0).getSoType().equals("2500")) {
+                    }
+                    /*
+                    else if (result.get(0).getSoType().equals("2500")) {
                         deliveryDetailImg03.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.badge_2_4));
                     } else if (result.get(0).getSoType().equals("4000")) {
                         deliveryDetailImg03.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.badge_2_1));
                     }
+                    */
+                    else{
+                        deliveryDetailText03.setText(" "+result.get(0).getSoTypeNm()+" ");
+                    }
+
+
                     //SEAT_TYPE       시공좌석유형  1인 / 2인
 
                     if (result.get(0).getSeatType().equals("1111")) {

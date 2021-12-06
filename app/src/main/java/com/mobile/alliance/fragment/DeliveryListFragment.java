@@ -359,14 +359,22 @@ public class DeliveryListFragment extends Fragment {
                             4000	AS오더
                               */
                              Drawable soTypeImg = null;
+                             String soTypeNm = null;
                              if (deliveryResult.get(i).getSoType().equals("1000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_2);
                              } else if (deliveryResult.get(i).getSoType().equals("2000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_3);
-                             } else if (deliveryResult.get(i).getSoType().equals("2500")) {
+                             }
+
+                             /*
+                             else if (deliveryResult.get(i).getSoType().equals("2500")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_4);
                              } else if (deliveryResult.get(i).getSoType().equals("4000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_1);
+                             }
+                            */
+                             else{
+                                 soTypeNm =" "+deliveryResult.get(i).getSoTypeNm()+" ";
                              }
 
 
@@ -386,6 +394,7 @@ public class DeliveryListFragment extends Fragment {
                                      , instCtrgImg
                                      , instTypeImg
                                      , soTypeImg
+                                     , soTypeNm
                                      , seatTypeImg
                                      , deliveryResult.get(i).getDlvyStatNm()
                                      , deliveryResult.get(i).getSoNo().toString()
@@ -491,14 +500,21 @@ public class DeliveryListFragment extends Fragment {
                                 4000	AS오더
                                   */
                                  Drawable soTypeImg = null;
+                                 String soTypeNm=null;
                                  if (deliveryResult.get(i).getSoType().equals("1000")) {
                                      soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_2);
                                  } else if (deliveryResult.get(i).getSoType().equals("2000")) {
                                      soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_3);
-                                 } else if (deliveryResult.get(i).getSoType().equals("2500")) {
+                                 }
+
+                                /* else if (deliveryResult.get(i).getSoType().equals("2500")) {
                                      soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_4);
                                  } else if (deliveryResult.get(i).getSoType().equals("4000")) {
                                      soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_1);
+                                 }*/
+
+                                 else{
+                                     soTypeNm =" "+deliveryResult.get(i).getSoTypeNm()+" ";
                                  }
 
 
@@ -518,6 +534,7 @@ public class DeliveryListFragment extends Fragment {
                                          , instCtrgImg
                                          , instTypeImg
                                          , soTypeImg
+                                         , soTypeNm
                                          , seatTypeImg
                                          , deliveryResult.get(i).getDlvyStatNm()
                                          , deliveryResult.get(i).getSoNo().toString()
@@ -617,16 +634,21 @@ public class DeliveryListFragment extends Fragment {
                             4000	AS오더
                               */
                              Drawable soTypeImg = null;
+                             String soTypeNm=null;
                              if (deliveryResult.get(i).getSoType().equals("1000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_2);
                              } else if (deliveryResult.get(i).getSoType().equals("2000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_3);
-                             } else if (deliveryResult.get(i).getSoType().equals("2500")) {
+                             }
+
+                            /* else if (deliveryResult.get(i).getSoType().equals("2500")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_4);
                              } else if (deliveryResult.get(i).getSoType().equals("4000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_1);
+                             }*/
+                             else{
+                                 soTypeNm =" "+deliveryResult.get(i).getSoTypeNm()+" ";
                              }
-
 
                              //SEAT_TYPE       시공좌석유형  1인 / 2인
                              Drawable seatTypeImg = null;
@@ -644,6 +666,7 @@ public class DeliveryListFragment extends Fragment {
                                      , instCtrgImg
                                      , instTypeImg
                                      , soTypeImg
+                                     ,soTypeNm
                                      , seatTypeImg
                                      , deliveryResult.get(i).getDlvyStatNm()
                                      , deliveryResult.get(i).getSoNo().toString()
@@ -745,16 +768,21 @@ public class DeliveryListFragment extends Fragment {
                             4000	AS오더
                               */
                              Drawable soTypeImg = null;
+                             String soTypeNm=null;
                              if (deliveryResult.get(i).getSoType().equals("1000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_2);
                              } else if (deliveryResult.get(i).getSoType().equals("2000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_3);
-                             } else if (deliveryResult.get(i).getSoType().equals("2500")) {
+                             }
+
+                            /* else if (deliveryResult.get(i).getSoType().equals("2500")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_4);
                              } else if (deliveryResult.get(i).getSoType().equals("4000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_1);
+                             }*/
+                             else{
+                                 soTypeNm =" "+deliveryResult.get(i).getSoTypeNm()+" ";
                              }
-
 
                              //SEAT_TYPE       시공좌석유형  1인 / 2인
                              Drawable seatTypeImg = null;
@@ -772,6 +800,7 @@ public class DeliveryListFragment extends Fragment {
                                      , instCtrgImg
                                      , instTypeImg
                                      , soTypeImg
+                                     ,soTypeNm
                                      , seatTypeImg
                                      , deliveryResult.get(i).getDlvyStatNm()
                                      , deliveryResult.get(i).getSoNo().toString()
@@ -874,16 +903,20 @@ public class DeliveryListFragment extends Fragment {
                             4000	AS오더
                               */
                              Drawable soTypeImg = null;
+                             String soTypeNm=null;
                              if (deliveryResult.get(i).getSoType().equals("1000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_2);
                              } else if (deliveryResult.get(i).getSoType().equals("2000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_3);
-                             } else if (deliveryResult.get(i).getSoType().equals("2500")) {
+                             }
+                             /*else if (deliveryResult.get(i).getSoType().equals("2500")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_4);
                              } else if (deliveryResult.get(i).getSoType().equals("4000")) {
                                  soTypeImg = ContextCompat.getDrawable(getContext(), R.drawable.badge_2_1);
+                             }*/
+                             else{
+                                 soTypeNm =" "+deliveryResult.get(i).getSoTypeNm()+" ";
                              }
-
 
                              //SEAT_TYPE       시공좌석유형  1인 / 2인
                              Drawable seatTypeImg = null;
@@ -901,6 +934,7 @@ public class DeliveryListFragment extends Fragment {
                                      , instCtrgImg
                                      , instTypeImg
                                      , soTypeImg
+                                     ,soTypeNm
                                      , seatTypeImg
                                      , deliveryResult.get(i).getDlvyStatNm()
                                      , deliveryResult.get(i).getSoNo().toString()
@@ -1124,20 +1158,23 @@ public class DeliveryListFragment extends Fragment {
                             4000	AS오더
                               */
                             Drawable soTypeImg = null;
+                            String soTypeNm=null;
                             if(result.get(i).getSoType().equals("1000")){
                                 soTypeImg=ContextCompat.getDrawable(getContext(), R.drawable.badge_2_2);
                             }
                             else if(result.get(i).getSoType().equals("2000")){
                                 soTypeImg=ContextCompat.getDrawable(getContext(), R.drawable.badge_2_3);
                             }
-                            else if(result.get(i).getSoType().equals("2500")){
+                            /*else if(result.get(i).getSoType().equals("2500")){
                                 soTypeImg=ContextCompat.getDrawable(getContext(), R.drawable.badge_2_4);
                             }
                             else if(result.get(i).getSoType().equals("4000")){
                                 soTypeImg=ContextCompat.getDrawable(getContext(), R.drawable.badge_2_1);
+                            }*/
+
+                            else{
+                                soTypeNm =" "+deliveryResult.get(i).getSoTypeNm()+" ";
                             }
-
-
 
 
 
@@ -1161,6 +1198,7 @@ public class DeliveryListFragment extends Fragment {
                                     , instCtrgImg
                                     , instTypeImg
                                     , soTypeImg
+                                    ,soTypeNm
                                     , seatTypeImg
                                     ,  result.get(i).getDlvyStatNm()
                                     ,  result.get(i).getSoNo().toString()
