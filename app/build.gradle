@@ -11,7 +11,7 @@ android {
         //targetSdk 31
         targetSdkVersion 28
         versionCode 1
-        versionName '0.2.0'
+        versionName '0.2.1'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         minSdkVersion 23
@@ -76,5 +76,9 @@ dependencies {
 
     //전화번호 포맷 통일 라이브러리
     //implementation 'com.googlecode.libphonenumber:libphonenumber:8.2.0'
+
+    //20211231 정연호 추가. 카렌다 뷰
+    implementation 'com.prolificinteractive:material-calendarview:1.4.3'
+    //implementation 'com.android.support:design:28.0.0'
 
 }

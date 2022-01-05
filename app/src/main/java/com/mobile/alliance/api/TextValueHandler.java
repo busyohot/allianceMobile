@@ -4,7 +4,7 @@ public class TextValueHandler {
 
     //공통
     //알림톡 발송 주소
-    public final static String TALK_URL = "https://alimtalk-api.bizmsg.kr/v2/sender/";
+    public static String TALK_URL;
     //카카오맵 주소
     public final static String KAKAO_MAP_URL = "https://dapi.kakao.com/v2/local/";
 
@@ -44,6 +44,9 @@ public class TextValueHandler {
             HTTP_HOST            = "http://gloakoreaimage.cafe24.com/alliance/";
             API_URL              = "http://www.alliance1.co.kr/alliance/alliance.apk";
             API_URL_PATH         = "http://www.alliance1.co.kr/alliance/";
+
+
+            TALK_URL = "https://alimtalk-api.bizmsg.kr/v2/sender/";
         }
         else if (type.equals("local"))
         {
@@ -62,6 +65,9 @@ public class TextValueHandler {
             HTTP_HOST            = "http://145.122.24.222/alliance/";
             API_URL              = "http://145.122.24.222/alliance/alliance.apk";
             API_URL_PATH         = "http://145.122.24.222/alliance/";
+
+
+            TALK_URL = "http://145.122.24.26:8080/mobile/";
         }
     }
 }

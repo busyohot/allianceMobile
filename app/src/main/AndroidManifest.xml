@@ -32,21 +32,30 @@
         android:roundIcon="@drawable/ic_launcher_alliance"
         android:supportsRtl="true"
         android:theme="@style/Theme.Alliance"
-        android:usesCleartextTraffic="true"
-
-        >
-
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.DeliveryDelay"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize|adjustPan|adjustNothing" />
+        <activity
+            android:name=".activity.DeliveryCancel"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|adjustPan|adjustNothing" />
         <activity
             android:name=".activity.AnyOrientationCaptureActivity"
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"
             android:theme="@style/zxing_CaptureTheme"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
-
-
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.BarCodeScanActivity"
-            android:exported="false" />
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|adjustPan|adjustNothing" />
         <activity
             android:name=".activity.ChangePassActivity"
             android:configChanges="orientation|screenSize"

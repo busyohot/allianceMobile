@@ -2,6 +2,10 @@ package com.mobile.alliance.api;
 
 
 import com.mobile.alliance.entity.LoginPwChangeVO;
+import com.mobile.alliance.entity.deliveryCancel.DeliveryCancelSaveVO;
+import com.mobile.alliance.entity.deliveryCancel.DeliveryCancelVO;
+import com.mobile.alliance.entity.deliveryDelay.DeliveryDelaySaveVO;
+import com.mobile.alliance.entity.deliveryDelay.DeliveryDelayVO;
 import com.mobile.alliance.entity.map.MapVO;
 import com.mobile.alliance.entity.barCode.BarCodeLiftChangeVO;
 import com.mobile.alliance.entity.barCode.BarCodeVO;
@@ -232,5 +236,32 @@ public interface ServiceApi {
     Call<MapVO> mFindPositionAddr(@Query("query") String query);  //call 부분 - 응답 , body 부분 - 요청
 
 
+    //20211231 정연호 추가. 배송취소
+    /*******************    DeliveryCancel.java     ***************************/
+    //배송취소 목록 불러오기
+    @Headers({"Content-Type: application/json"})
+    @POST("comComboList")
+    Call<List<DeliveryCancelVO>> deliveryCancelCombo(@Body DeliveryCancelVO deliveryCancelVO);  //call 부분 - 응답 , body 부분 - 요청
 
+
+
+    //배송취소 저장하기 (SAVE) 1줄넣어 1줄 받기
+    @Headers({"Content-Type: application/json"})
+    @POST("mDeliveryCancelSave")
+    Call<DeliveryCancelVO> mDeliveryCancelSave(@Body DeliveryCancelSaveVO deliveryCancelSaveVO);  //call 부분 - 응답 , body 부분 - 요청
+
+
+
+    //20211231 정연호 추가. 배송연기
+    /*******************    DeliveryDelay.java     ***************************/
+    //배송연기 날짜 목록 불러오기
+    @Headers({"Content-Type: application/json"})
+    @POST("mDeliveryDelayList")
+    Call<List<DeliveryDelayVO>> mDeliveryDelayList(@Body DeliveryDelayVO deliveryDelayVO);  //call 부분 - 응답 , body 부분 - 요청
+
+
+    //배송연기 저장하기 (SAVE) 1줄넣어 1줄 받기
+    @Headers({"Content-Type: application/json"})
+    @POST("mDeliveryDelaySave")
+    Call<DeliveryDelayVO> mDeliveryDelaySave(@Body DeliveryDelaySaveVO deliveryDelaySaveVO);  //call 부분 - 응답 , body 부분 - 요청
 }

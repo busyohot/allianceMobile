@@ -29,8 +29,8 @@ import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 
+
 import android.util.Log;
-import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -144,7 +144,7 @@ public class DeliveryListDetail extends AppCompatActivity {
 
     Button  deliveryCmplBtn;    //배송완료 버튼
 
-    String instMobileMIdValue;
+    String instMobileMIdValue = "";
     String no;
     Button deliveryCancleBtn,deliveryDelayBtn;
 
@@ -156,6 +156,11 @@ public class DeliveryListDetail extends AppCompatActivity {
     TextView deliveryDetailText03;  //오더유형
 
     String editYn;              //입력 가능한지, 배송일+1일의 10시가 지나서 입력이 불가능 한지를 표시. Y 입력-상차, 미마감,배송완료 등 가능 N 불가능
+
+    //20211231 정연호 추가. 배송취소 액티비티 열때 넘겨야할 값을 지정하기위해 추가
+    String  tblSoMIdValue = "";
+    //20211231 정연호 추가. 배송일을 여기에 저장하여 배송연기 버튼 누르면 넘겨줌
+    String  instDtValue = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -279,10 +284,17 @@ public class DeliveryListDetail extends AppCompatActivity {
         deliveryCancleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //20211231 정연호 주석처리.
+                /*
                 Toast toast = Toast.makeText(getApplicationContext(), "배송 취소\n개발예정입니다. 조금만 기다려주세요.", Toast.LENGTH_SHORT);   //0 short , 1 long
                 toast.setGravity(Gravity.CENTER|Gravity.BOTTOM,0, 20);
                 toast.show();
+                */
+                //20211231 정연호 추가. 배송취소를 눌렀을때 배송취소하는 화면으로 액티비티 이동
+                Intent deliveryCancelIntent = new Intent(DeliveryListDetail.this, DeliveryCancel.class);
+                deliveryCancelIntent.putExtra("instMobileMId", instMobileMIdValue);
+                deliveryCancelIntent.putExtra("tblSoMId", tblSoMIdValue);
+                startActivity(deliveryCancelIntent);
 
             }
 
@@ -292,11 +304,18 @@ public class DeliveryListDetail extends AppCompatActivity {
         deliveryDelayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //20211231 정연호 주석처리.
+                /*
                 Toast toast = Toast.makeText(getApplicationContext(), "배송 연기\n개발예정입니다. 조금만 기다려주세요.", Toast.LENGTH_SHORT);   //0 short , 1 long
                 toast.setGravity(Gravity.CENTER|Gravity.BOTTOM,0, 20);
                 toast.show();
-
+                */
+                //20211231 정연호 추가. 배송연기를 눌렀을때 배송연기하는 화면으로 액티비티 이동
+                Intent deliveryDelayIntent = new Intent(DeliveryListDetail.this, DeliveryDelay.class);
+                deliveryDelayIntent.putExtra("instMobileMId", instMobileMIdValue);
+                deliveryDelayIntent.putExtra("tblSoMId", tblSoMIdValue);
+                deliveryDelayIntent.putExtra("instDt", instDtValue);
+                startActivity(deliveryDelayIntent);
             }
 
         });
@@ -320,6 +339,9 @@ public class DeliveryListDetail extends AppCompatActivity {
         //backPressCloseHandler.onBackPressed();
     }
 
+
+
+
     //화면 열자마자 조회하는 부분
     private void mDeliveryDetailSrch(DeliveryDetailSrchVO dliveryDetailSrchVO) {
         service.mDeliveryDetailSrch(dliveryDetailSrchVO).enqueue(new Callback<List<DeliveryVO>>() {
@@ -331,6 +353,11 @@ public class DeliveryListDetail extends AppCompatActivity {
                 if (response.isSuccessful() && response.body().size() > 0) //응답값이 있다 && 조회한게 1개 이상
                 {
                     List<DeliveryVO> result = response.body();
+
+                    //20211231 정연호 추가. 주문고유ID
+                    tblSoMIdValue = result.get(0).getTblSoMId();
+                    //20211231 정연호 추가. 시공일 넣기
+                    instDtValue = result.get(0).getInstDt();
 
                     editYn = result.get(0).getEditYn();         //입력 가능한지, 배송일+1일의 10시가 지나서 입력이 불가능 한지를 표시. Y 입력-상차, 미마감,배송완료 등 가능 N 불가능
 
@@ -380,6 +407,20 @@ public class DeliveryListDetail extends AppCompatActivity {
                         deliveryNoCmpllBtn.setBackground(getApplicationContext().getDrawable(
                                 R.drawable.rounded_gray_button));
                         deliveryCmplBtn.setText("배송완료");
+
+                       //20211231 정연호 추가. 모바일 권한이 시스템 관리자 일경우 미마감, 배송완료를 활성화 해줌
+                       if(sharePref.getString("mobileGrntCd", "").equals("9999"))
+                       {
+                           deliveryCmplBtn.setClickable(true);
+                           deliveryCmplBtn.setBackground(getApplicationContext().getDrawable(
+                                   R.drawable.rounded_blue_button));
+                           deliveryNoCmpllBtn.setText("미마감");
+                            deliveryNoCmpllBtn.setClickable(true);
+                           deliveryNoCmpllBtn.setBackground(getApplicationContext().getDrawable(
+                                   R.drawable.rounded_blue_button));
+                           deliveryCmplBtn.setText("배송완료");
+
+                       }
 
                     }
                     if (result.get(0).getDlvyStatCd().equals("5000")) {
@@ -589,7 +630,9 @@ public class DeliveryListDetail extends AppCompatActivity {
                         public void onClick(View v) {
 
 
-                            if(editYn.equals("N"))
+                            if(     editYn.equals("N")
+                                    &&  !sharePref.getString("mobileGrntCd", "").equals("9999") //20211231 정연호. 시스템 권한이 시스템관리자가 아닐때
+                            )
                             {
                                 View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_success, null);
 
@@ -646,7 +689,9 @@ public class DeliveryListDetail extends AppCompatActivity {
                             }
 
 
-                           else if(result.get(0).getDlvyStatCd().equals("4000")){   //배송준비 완료상태에서 해피콜을 안하고 미마감 하려고 할때
+                           else if(     result.get(0).getDlvyStatCd().equals("4000")     //배송준비 완료상태에서 해피콜을 안하고 미마감 하려고 할때
+                                    &&  !sharePref.getString("mobileGrntCd", "").equals("9999") //20211231 정연호. 시스템 권한이 시스템관리자가 아닐때
+                           ){  
 
                                 View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_confirm, null);
                                 AlertDialog.Builder builder = new AlertDialog.Builder(DeliveryListDetail.this);
@@ -673,7 +718,10 @@ public class DeliveryListDetail extends AppCompatActivity {
                                 no_btn.setVisibility(View.GONE);
 
                             }
-                             else   if(result.get(0).getDlvyStatCd().equals("5000")){   //해피콜 완료 상태에서 상차하기를 안하고 미마감 하려고 할때
+                             else if(   result.get(0).getDlvyStatCd().equals("5000")
+                                    &&  !sharePref.getString("mobileGrntCd", "").equals("9999") //20211231 정연호. 시스템 권한이 시스템관리자가 아닐때
+
+                             ){   //해피콜 완료 상태에서 상차하기를 안하고 미마감 하려고 할때
 
                                 View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_confirm, null);
                                 AlertDialog.Builder builder = new AlertDialog.Builder(DeliveryListDetail.this);
@@ -741,7 +789,9 @@ public class DeliveryListDetail extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
 
-                            if(editYn.equals("N"))
+                            if(editYn.equals("N")
+                                    &&  !sharePref.getString("mobileGrntCd", "").equals("9999") //20211231 정연호. 시스템 권한이 시스템관리자가 아닐때
+                            )
                             {
                                 View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_success, null);
 
@@ -767,7 +817,9 @@ public class DeliveryListDetail extends AppCompatActivity {
                                 return;
                             }
 
-                            else if(result.get(0).getDlvyStatCd().equals("8000")){   // 미마감
+                            else if(result.get(0).getDlvyStatCd().equals("8000")    //미마감
+                                    &&  !sharePref.getString("mobileGrntCd", "").equals("9999") //20211231 정연호. 시스템 권한이 시스템관리자가 아닐때
+                            ){   // 미마감
 
                                 View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_success, null);
 
@@ -792,7 +844,9 @@ public class DeliveryListDetail extends AppCompatActivity {
                                 return;
                             }
 
-                            else if(result.get(0).getDlvyStatCd().equals("4000")){   //배송준비 완료상태에서 해피콜을 안하고 미마감 하려고 할때
+                            else if(result.get(0).getDlvyStatCd().equals("4000")
+                                    &&  !sharePref.getString("mobileGrntCd", "").equals("9999") //20211231 정연호. 시스템 권한이 시스템관리자가 아닐때
+                            ){   //배송준비 완료상태에서 해피콜을 안하고 미마감 하려고 할때
 
                                 View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_confirm, null);
                                 AlertDialog.Builder builder = new AlertDialog.Builder(DeliveryListDetail.this);
@@ -819,7 +873,9 @@ public class DeliveryListDetail extends AppCompatActivity {
 
                             }
 
-                            else if(result.get(0).getDlvyStatCd().equals("5000")){   //해피콜 완료 상태에서 상차하기를 안하고 미마감 하려고 할때
+                            else if(result.get(0).getDlvyStatCd().equals("5000")
+                                    &&  !sharePref.getString("mobileGrntCd", "").equals("9999") //20211231 정연호. 시스템 권한이 시스템관리자가 아닐때
+                            ){   //해피콜 완료 상태에서 상차하기를 안하고 미마감 하려고 할때
 
 
                                 View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_confirm, null);
@@ -862,18 +918,9 @@ public class DeliveryListDetail extends AppCompatActivity {
 
                                     }
                                 });
-
-
-
-
-
-
                             }
                             else
                             {
-
-
-
                                 //상태가 배송완료 상태면 배송완료 취소 화면을 연다
                                 if(result.get(0).getDlvyStatCd().equals("9999"))    //9999 배송완료
                                 {
