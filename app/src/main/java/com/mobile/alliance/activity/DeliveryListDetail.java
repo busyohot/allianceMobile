@@ -389,7 +389,7 @@ public class DeliveryListDetail extends AppCompatActivity {
                             배송중 회색 5000	해피콜 완료
                             배송중 초록 6999	부분상차(완료)
                             배송중 초록 7000	상차완료
-                            빨강 8000	배송완료(미마감)
+                            빨강 8000	배송완료(미마감) 8060 기사취소
                             파랑 9999	배송완료
 
                              */
@@ -459,7 +459,7 @@ public class DeliveryListDetail extends AppCompatActivity {
                                 R.drawable.rounded_blue_button));
                         deliveryCmplBtn.setText("배송완료");
 
-                    } else if (result.get(0).getDlvyStatCd().equals("8000")) {
+                    } else if (result.get(0).getDlvyStatCd().equals("8000") || result.get(0).getDlvyStatCd().equals("8060")) { //20220106 정연호 8060 기사취소 추가
                         stateColor = Color.parseColor("#FF0000");
                         deliveryCmplBtn.setClickable(false);
 
@@ -767,8 +767,8 @@ public class DeliveryListDetail extends AppCompatActivity {
                             }
                             else
                             {
-                                //상태가 미마감 상태면 미마감 취소 화면을 연다
-                                if(result.get(0).getDlvyStatCd().equals("8000"))    //8000 미마감
+                                //상태가 미마감 8000 상태면 미마감 취소 화면을 연다
+                                if(result.get(0).getDlvyStatCd().equals("8000") || result.get(0).getDlvyStatCd().equals("8060")) //20220106 정연호 8060 기사취소 추가
                                 {
                                     Intent noCmplCancel = new Intent(DeliveryListDetail.this, NoCmplCancelActivity.class);
                                     noCmplCancel.putExtra("instMobileMId", result.get(0).getInstMobileMId()); //모바일 헤더 아이디
@@ -817,7 +817,7 @@ public class DeliveryListDetail extends AppCompatActivity {
                                 return;
                             }
 
-                            else if(result.get(0).getDlvyStatCd().equals("8000")    //미마감
+                            else if(    (result.get(0).getDlvyStatCd().equals("8000")  || result.get(0).getDlvyStatCd().equals("8060")  )  //20220106 정연호 8060 기사취소 추가    //미마감
                                     &&  !sharePref.getString("mobileGrntCd", "").equals("9999") //20211231 정연호. 시스템 권한이 시스템관리자가 아닐때
                             ){   // 미마감
 

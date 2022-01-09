@@ -315,7 +315,7 @@ public class DeliveryListFragment extends Fragment {
                             배송중 회색 5000	해피콜 완료
                             배송중 초록 6999	부분상차(완료)
                             배송중 초록 7000	상차완료
-                            빨강 8000	배송완료(미마감)
+                            빨강 8000	배송완료(미마감) 8060 기사취소
                             파랑 9999	배송완료
 
                              */
@@ -324,7 +324,7 @@ public class DeliveryListFragment extends Fragment {
                                  stateColor = Color.parseColor("#696969");
                              } else if (deliveryResult.get(i).getDlvyStatCd().equals("6999") || deliveryResult.get(i).getDlvyStatCd().equals("7000")) {
                                  stateColor = Color.parseColor("#20B2AA");
-                             } else if (deliveryResult.get(i).getDlvyStatCd().equals("8000")) {
+                             } else if (deliveryResult.get(i).getDlvyStatCd().equals("8000") || deliveryResult.get(i).getDlvyStatCd().equals("8060")) { //20220106 정연호 8060 기사취소 추가
                                  stateColor = Color.parseColor("#FF0000");
                              } else if (deliveryResult.get(i).getDlvyStatCd().equals("9999")) {
                                  stateColor = Color.parseColor("#0000FF");
@@ -456,7 +456,7 @@ public class DeliveryListFragment extends Fragment {
                                 배송중 회색 5000	해피콜 완료
                                 배송중 초록 6999	부분상차(완료)
                                 배송중 초록 7000	상차완료
-                                빨강 8000	배송완료(미마감)
+                                빨강 8000	배송완료(미마감) 8060 기사취소
                                 파랑 9999	배송완료
 
                                  */
@@ -465,7 +465,7 @@ public class DeliveryListFragment extends Fragment {
                                      stateColor = Color.parseColor("#696969");
                                  } else if (deliveryResult.get(i).getDlvyStatCd().equals("6999") || deliveryResult.get(i).getDlvyStatCd().equals("7000")) {
                                      stateColor = Color.parseColor("#20B2AA");
-                                 } else if (deliveryResult.get(i).getDlvyStatCd().equals("8000")) {
+                                 } else if (deliveryResult.get(i).getDlvyStatCd().equals("8000") || deliveryResult.get(i).getDlvyStatCd().equals("8060")) { //20220106 정연호 8060 기사취소 추가
                                      stateColor = Color.parseColor("#FF0000");
                                  } else if (deliveryResult.get(i).getDlvyStatCd().equals("9999")) {
                                      stateColor = Color.parseColor("#0000FF");
@@ -590,7 +590,7 @@ public class DeliveryListFragment extends Fragment {
                             배송중 회색 5000	해피콜 완료
                             배송중 초록 6999	부분상차(완료)
                             배송중 초록 7000	상차완료
-                            빨강 8000	배송완료(미마감)
+                            빨강 8000	배송완료(미마감) 8060 기사취소
                             파랑 9999	배송완료
 
                              */
@@ -599,7 +599,7 @@ public class DeliveryListFragment extends Fragment {
                                  stateColor = Color.parseColor("#696969");
                              } else if (deliveryResult.get(i).getDlvyStatCd().equals("6999") || deliveryResult.get(i).getDlvyStatCd().equals("7000")) {
                                  stateColor = Color.parseColor("#20B2AA");
-                             } else if (deliveryResult.get(i).getDlvyStatCd().equals("8000")) {
+                             } else if (deliveryResult.get(i).getDlvyStatCd().equals("8000") || deliveryResult.get(i).getDlvyStatCd().equals("8060")) { //20220106 정연호 8060 기사취소 추가
                                  stateColor = Color.parseColor("#FF0000");
                              } else if (deliveryResult.get(i).getDlvyStatCd().equals("9999")) {
                                  stateColor = Color.parseColor("#0000FF");
@@ -715,7 +715,7 @@ public class DeliveryListFragment extends Fragment {
                 adapter = new DeliveryListViewAdapter();
                      int g=0;
                 for (int i = 0; i < deliveryResult.size(); i++) {
-                     if(        deliveryResult.get(i).getDlvyStatCd().equals("8000") ) {
+                     if(        deliveryResult.get(i).getDlvyStatCd().equals("8000") || deliveryResult.get(i).getDlvyStatCd().equals("8060")) { //20220106 정연호 8060 기사취소 추가
 
                          //리스트 아답터에 넣는부분
                              int stateColor = 0;
@@ -724,7 +724,7 @@ public class DeliveryListFragment extends Fragment {
                             배송중 회색 5000	해피콜 완료
                             배송중 초록 6999	부분상차(완료)
                             배송중 초록 7000	상차완료
-                            빨강 8000	배송완료(미마감)
+                            빨강 8000	배송완료(미마감) 8060 기사취소
                             파랑 9999	배송완료
 
                              */
@@ -733,7 +733,7 @@ public class DeliveryListFragment extends Fragment {
                                  stateColor = Color.parseColor("#696969");
                              } else if (deliveryResult.get(i).getDlvyStatCd().equals("6999") || deliveryResult.get(i).getDlvyStatCd().equals("7000")) {
                                  stateColor = Color.parseColor("#20B2AA");
-                             } else if (deliveryResult.get(i).getDlvyStatCd().equals("8000")) {
+                             } else if (deliveryResult.get(i).getDlvyStatCd().equals("8000") || deliveryResult.get(i).getDlvyStatCd().equals("8060")) { //20220106 정연호 8060 기사취소 추가
                                  stateColor = Color.parseColor("#FF0000");
                              } else if (deliveryResult.get(i).getDlvyStatCd().equals("9999")) {
                                  stateColor = Color.parseColor("#0000FF");
@@ -859,7 +859,7 @@ public class DeliveryListFragment extends Fragment {
                             배송중 회색 5000	해피콜 완료
                             배송중 초록 6999	부분상차(완료)
                             배송중 초록 7000	상차완료
-                            빨강 8000	배송완료(미마감)
+                            빨강 8000	배송완료(미마감) 8060 기사취소
                             파랑 9999	배송완료
 
                              */
@@ -868,7 +868,7 @@ public class DeliveryListFragment extends Fragment {
                                  stateColor = Color.parseColor("#696969");
                              } else if (deliveryResult.get(i).getDlvyStatCd().equals("6999") || deliveryResult.get(i).getDlvyStatCd().equals("7000")) {
                                  stateColor = Color.parseColor("#20B2AA");
-                             } else if (deliveryResult.get(i).getDlvyStatCd().equals("8000")) {
+                             } else if (deliveryResult.get(i).getDlvyStatCd().equals("8000") || deliveryResult.get(i).getDlvyStatCd().equals("8060")) { //20220106 정연호 8060 기사취소 추가
                                  stateColor = Color.parseColor("#FF0000");
                              } else if (deliveryResult.get(i).getDlvyStatCd().equals("9999")) {
                                  stateColor = Color.parseColor("#0000FF");
@@ -1098,7 +1098,7 @@ public class DeliveryListFragment extends Fragment {
                             회색 5000	해피콜 완료
                             초록 6999	부분상차(완료)
                             초록 7000	상차완료
-                            빨강 8000	배송완료(미마감)
+                            빨강 8000	배송완료(미마감) 8060 기사취소
                             파랑 9999	배송완료
 
                              */
@@ -1110,8 +1110,8 @@ public class DeliveryListFragment extends Fragment {
                             {
                                 stateColor = Color.parseColor("#20B2AA");
                             }
-                            else if(result.get(i).getDlvyStatCd().equals("8000") )
-                            {
+                            else if(result.get(i).getDlvyStatCd().equals("8000")  || result.get(i).getDlvyStatCd().equals("8060")) { //20220106 정연호 8060 기사취소 추가
+
                                 stateColor = Color.parseColor("#FF0000");
                             }
                             else if(result.get(i).getDlvyStatCd().equals("9999") )
@@ -1226,8 +1226,8 @@ public class DeliveryListFragment extends Fragment {
                             if (    deliveryResult.get(i).getDlvyStatCd().equals("4000"))
                             {       dBtn03Cnt++;     }
                             //미마감 수량 체크
-                            if (    deliveryResult.get(i).getDlvyStatCd().equals("8000"))
-                            {       dBtn04Cnt++;     }
+                            if (    deliveryResult.get(i).getDlvyStatCd().equals("8000") || deliveryResult.get(i).getDlvyStatCd().equals("8060")) { //20220106 정연호 8060 기사취소 추가
+                                   dBtn04Cnt++;     }
                             //배송완료 수량 체크
                             if (    deliveryResult.get(i).getDlvyStatCd().equals("9999"))
                             {       dBtn05Cnt++;     }

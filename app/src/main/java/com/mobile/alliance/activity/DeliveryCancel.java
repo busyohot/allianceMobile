@@ -33,6 +33,7 @@ import com.mobile.alliance.api.ServiceApi;
 import com.mobile.alliance.api.TextValueHandler;
 import com.mobile.alliance.entity.deliveryCancel.DeliveryCancelSaveVO;
 import com.mobile.alliance.entity.deliveryCancel.DeliveryCancelVO;
+import com.mobile.alliance.fragment.DeliveryListFragment;
 
 
 import java.net.CookieManager;
@@ -421,9 +422,23 @@ public class DeliveryCancel extends AppCompatActivity {
                         TextView ok_txt = dialogView.findViewById(R.id.successText);
                         ok_txt.setText("배송취소 완료");
                         ok_btn.setOnClickListener(new View.OnClickListener() {
-                            @Override
+                            @SneakyThrows @Override
                             public void onClick(View v) {
                                 alertDialog.dismiss();
+
+                                //배송목록 갱신하기
+                                DeliveryListFragment deliveryListFragment = (DeliveryListFragment)DeliveryListFragment._DeliveryListFragment;
+                                deliveryListFragment.changeDate();
+
+
+                                //상세정보보기 다시 정보 읽기
+
+                                DeliveryListDetail deliveryListDetail = (DeliveryListDetail)DeliveryListDetail._DeliveryListDetail;
+
+                                deliveryListDetail.deliveryDetailSrch();
+
+
+
                                 finish();
                             }
                         });
