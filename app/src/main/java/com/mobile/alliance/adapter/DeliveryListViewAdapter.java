@@ -350,7 +350,10 @@ public class DeliveryListViewAdapter extends BaseAdapter {
             public void onClick(View view) {
 
 
-                final CharSequence[] oItems = {"1", "2", "3", "4", "6","7", "8", "9", "10"};
+                final CharSequence[] oItems = {   "1", "2", "3", "4", "5", "6","7", "8", "9", "10"
+                                                , "11", "12", "13", "14", "15", "16","17", "18", "19", "20"
+                                                , "21", "22", "23", "24", "25", "26","27", "28", "29", "30"
+                                                };       //20220110 정연호 추가 , 5 추가, 11~30 추가
 
                 AlertDialog.Builder msgBuilder = new AlertDialog.Builder(context,R.style.deliverySelectNoStyle)
                     .setTitle("배송 순번을 선택하세요")
