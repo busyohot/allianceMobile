@@ -151,7 +151,10 @@ public class Mobile001Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:01024892979"));
+
+                //20220113 정연호. 사무실전화번호 변경
+                //intent.setData(Uri.parse("tel:01024892979"));
+                intent.setData(Uri.parse("tel:"+sharePref.getString("officeTel","")));
                 startActivity(intent);
             }
         });

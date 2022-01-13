@@ -34,6 +34,9 @@ public class LoginVO extends CommonVO
     @SerializedName("dcCd")   private	String	dcCd	;
     @SerializedName("dcNm")   private	String	dcNm	;
 
+    //20220113 정연호. 사무실전화번호 추가하기
+    @SerializedName("officeTel")   private	String	officeTel	;
+
     public LoginVO(String  cmpyCd, String  userId, String  userPw, String cnntIp)
     {
         this.setCmpyCd(cmpyCd);

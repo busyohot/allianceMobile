@@ -270,6 +270,9 @@ public class FirstActivity extends AppCompatActivity {
 
                             editor.putInt("interval", 360);  //단위는 분
 
+                            //20220113 정연호. 사무실전화번호
+                            editor.putString("officeTel", result.getOfficeTel());
+
                             editor.apply();     //저장종료
 
                             if (result.getRtnYn().equals("Y")) {
