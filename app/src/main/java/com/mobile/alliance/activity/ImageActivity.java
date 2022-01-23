@@ -1,34 +1,19 @@
 package com.mobile.alliance.activity;
 
-import static android.view.View.GONE;
-
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.PointF;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v4.content.ContextCompat;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,24 +22,20 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.mobile.alliance.R;
 import com.mobile.alliance.api.CommonHandler;
 import com.mobile.alliance.api.DrawUrlImageSubTaskHandler;
-import com.mobile.alliance.api.DrawUrlImageTaskHandler;
 import com.mobile.alliance.api.LogoutHandler;
-
+import com.mobile.alliance.api.TextValueHandler;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 
+import it.sauronsoftware.ftp4j.FTPClient;
+import it.sauronsoftware.ftp4j.FTPException;
+import it.sauronsoftware.ftp4j.FTPIllegalReplyException;
 import lombok.SneakyThrows;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -63,8 +44,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class ImageActivity extends AppCompatActivity {
+    private static TextValueHandler textValueHandler = new TextValueHandler();
 
-
+    String delFile="";
 
     CommonHandler commonHandler = new CommonHandler(this);
     Context context;
@@ -79,6 +61,7 @@ public class ImageActivity extends AppCompatActivity {
     private String savePath = "AllianceImage";
     private String FileName = null;
 
+    Handler handler = new Handler();
 
     @SuppressLint("ResourceType") @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -88,59 +71,36 @@ public class ImageActivity extends AppCompatActivity {
         String imageUri = getIntent().getStringExtra("imageUri");
         Integer imageNo = Integer.parseInt(getIntent().getStringExtra("imageNo"));
 
-
         logoutHandler = new LogoutHandler(this);
-String imageType = getIntent().getStringExtra("imageType");
-//Log.d("ImageActivity",imageType);
-String imageGubn = getIntent().getStringExtra("imageGubn");
+        String imageType = getIntent().getStringExtra("imageType");
+        //Log.d("ImageActivity",imageType);
+        String imageGubn = getIntent().getStringExtra("imageGubn");
 
-//다운로드받을 디렉토리 생성하기
-       MakePhtoDir();
-
-
-
+        //다운로드받을 디렉토리 생성하기
+        MakePhtoDir();
         centerImage = (SubsamplingScaleImageView) findViewById(R.id.centerImage);
-        //centerImage.setImage(ImageSource.resource(R.drawable.img_companylogo_alliance));
-        //centerImage.setImage(ImageSource.uri("file:///storage/emulated/0/DCIM/Camera/20211013_221840.jpg"));
-
-
-
-
-
-
-
 
         delBtn = (Button) findViewById(R.id.delBtn);
         downBtn = (Button) findViewById(R.id.downBtn);
-        if(imageType.equals("delete"))
-        {
+        if(imageType.equals("delete")){
             downBtn.setVisibility(View.GONE);    //이미지 보기 종료가 삭제라면 다운로드버튼을 가린다
             centerImage.setImage(ImageSource.uri(imageUri));
         }
-        else if(imageType.equals("download"))
-        {
+        else if(imageType.equals("download")){
             delBtn.setVisibility(View.GONE);    //이미지 보기 종료가 다운이라면 삭제버튼을 가린다
             try{
                 new DrawUrlImageSubTaskHandler(
                         (SubsamplingScaleImageView) findViewById(R.id.centerImage))
                         .execute(imageUri);
             }
-            catch (Exception e)
-            {
+            catch (Exception e){
                 e.printStackTrace();
             }
-
-            if(!centerImage.isEnabled())
-            {
+            if(!centerImage.isEnabled()){
                 downBtn.setVisibility(View.GONE);
                 commonHandler.showFinishAlertDialog("이미지 로딩 실패","이미지 경로가 잘못되었거나,서버에 이미지가 없습니다.","Y");
             }
-
-
         }
-
-
-
 
         delBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -162,29 +122,35 @@ String imageGubn = getIntent().getStringExtra("imageGubn");
                 ok_btn.setOnClickListener(new View.OnClickListener() {
                     @SneakyThrows @Override
                     public void onClick(View v) {
-
-
                         alertDialog.dismiss();
-
                         if(imageGubn.equals("no")){     //미마감 등록화면에서 현재(이미지보기)를 오픈했다면
+                            //20220123 정연호 추가. 삭제 하면 파일서버에서도 삭제하기
+                            delFile = NoCmplActivity.picFileName[imageNo].getText().toString();
+                            DeleteFileNThread deleteFileNThread = new DeleteFileNThread();
+                            deleteFileNThread.start();
+
                             NoCmplActivity.LOCK[imageNo] = 0;
                             NoCmplActivity.picAddImg[imageNo]
                                     .setImageDrawable(getDrawable(R.mipmap.ic_camera));
                             NoCmplActivity.picAddUri[imageNo].setText("");
                             NoCmplActivity.picFileName[imageNo].setText("");
+
                             finish();
                         }
                         if(imageGubn.equals("yes")){     //배송완료 등록화면에서 현재(이미지보기)를 오픈했다면
+                            //20220123 정연호 추가. 삭제 하면 파일서버에서도 삭제하기
+                            delFile = YesCmplActivity.yesPicFileName[imageNo].getText().toString();
+                            DeleteFileNThread deleteFileNThread = new DeleteFileNThread();
+                            deleteFileNThread.start();
+
                             YesCmplActivity.YES_LOCK[imageNo] = 0;
                             YesCmplActivity.yesPicAddImg[imageNo]
                                     .setImageDrawable(getDrawable(R.mipmap.ic_camera));
                             YesCmplActivity.yesPicAddUri[imageNo].setText("");
                             YesCmplActivity.yesPicFileName[imageNo].setText("");
+
                             finish();
                         }
-
-
-
                     }
                 });
 
@@ -192,17 +158,11 @@ String imageGubn = getIntent().getStringExtra("imageGubn");
                 no_btn.setOnClickListener(new View.OnClickListener() {
                     @SneakyThrows @Override
                     public void onClick(View v) {
-
                         alertDialog.dismiss();
-
                     }
                 });
             }
         });
-
-
-
-
 
         downBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -272,9 +232,11 @@ String imageGubn = getIntent().getStringExtra("imageGubn");
             dir.mkdirs(); // make dir
     }
 
+    /*
     private String getDefaultDownloadDirectory() {
         return this.getExternalFilesDir(null) + "/download/";
     }
+    */
 
     /**
      * Requests a server to download a file.
@@ -376,6 +338,54 @@ String imageGubn = getIntent().getStringExtra("imageGubn");
                     ).show();
                 }
             });
+        }
+    }
+    //안드로이드 최근 버전에서는 네크워크 통신시에 반드시 스레드를 요구한다.
+    class DeleteFileNThread extends Thread{
+        public DeleteFileNThread() {
+        }
+        @SneakyThrows
+        @Override
+
+        public void run() {
+            delete(delFile);
+        }
+
+        public void delete(String deleteFile) throws FTPException, IOException, FTPIllegalReplyException{
+
+            FTPClient client = new FTPClient();
+            try{
+                client.connect(textValueHandler.FTP_HOST, textValueHandler.FTP_PORT);//ftp 서버와 연결, 호스트와 포트를 기입
+                client.login(textValueHandler.FTP_USER, textValueHandler.FTP_PASS);//로그인을 위해 아이디와 패스워드 기입
+                client.setType(FTPClient.TYPE_BINARY);//2진으로 변경
+                client.setPassive(true);
+                String[] arr = deleteFile.split("\\/");
+                client.changeDirectory(textValueHandler.FTP_DIR);
+
+                for (int i = 0; i < arr.length - 1; i++) {
+                    client.changeDirectory(arr[i]+"/");
+                }
+                //Log.d(TAG,"FTP FILE DELETE : "+arr[(arr.length - 1)]);
+                client.deleteFile(arr[(arr.length - 1)]);
+            }
+            catch(Exception e)
+            {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //commonHandler.showToast("서버 이미지 파일 삭제 실패",0,17,17);
+                        //Log.d(TAG,"FTP FILE DELETE FAIL, 서버 이미지 파일 삭제 실패");
+                    }
+                });
+                e.printStackTrace();
+                try {
+                    if(client != null){
+                        client.disconnect(true);
+                    }
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
         }
     }
 }

@@ -29,8 +29,6 @@ import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 
-
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +47,7 @@ import android.widget.Toast;
 import com.mobile.alliance.R;
 
 import com.mobile.alliance.api.CommonHandler;
-import com.mobile.alliance.api.LogoutHandler;
+
 import com.mobile.alliance.api.PersistentCookieStore;
 import com.mobile.alliance.api.RetrofitClient;
 import com.mobile.alliance.api.ServiceApi;
@@ -63,6 +61,7 @@ import com.mobile.alliance.fragment.DeliveryListFragment;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +79,7 @@ public class DeliveryListDetail extends AppCompatActivity {
     //뒤로가기 버튼 2번 누르면 취소 하는것
     //private BackPressCloseHandler backPressCloseHandler;
     //로그아웃
-    private LogoutHandler logoutHandler;
+    //private LogoutHandler logoutHandler;
     //진행바 뷰
     private ProgressBar mProgressView;
     private ServiceApi service;
@@ -171,7 +170,7 @@ public class DeliveryListDetail extends AppCompatActivity {
 
         setContentView(R.layout.activity_delivery_list_detail);
 
-        logoutHandler = new LogoutHandler(this);
+        //logoutHandler = new LogoutHandler(this);
         //backPressCloseHandler = new BackPressCloseHandler(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); //키보드 뜰때 입력창 가리지 않고 화면을 위로 올리기
 
@@ -346,7 +345,7 @@ public class DeliveryListDetail extends AppCompatActivity {
     private void mDeliveryDetailSrch(DeliveryDetailSrchVO dliveryDetailSrchVO) {
         service.mDeliveryDetailSrch(dliveryDetailSrchVO).enqueue(new Callback<List<DeliveryVO>>() {
 
-            @SuppressLint({"NewApi", "ResourceAsColor", "LongLogTag"})
+            @SneakyThrows @SuppressLint({"NewApi", "ResourceAsColor", "LongLogTag"})
             @Override
             public void onResponse(Call<List<DeliveryVO>> call, Response<List<DeliveryVO>> response) {
 
@@ -1481,7 +1480,6 @@ public class DeliveryListDetail extends AppCompatActivity {
                                 return;
                             }
 
-
                             View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_confirm, null);
                             AlertDialog.Builder builder = new AlertDialog.Builder(DeliveryListDetail.this);
                             builder.setView(dialogView);
@@ -1544,12 +1542,16 @@ public class DeliveryListDetail extends AppCompatActivity {
                     nestedScrollView.setVisibility(View.GONE);
                     deliveryDetailLiftBtn.setVisibility(View.GONE);
                     deliveryBtnArea.setVisibility(View.GONE);
-                    commonHandler.showFinishAlertDialog("배송 상세조회 실패", "배송 상세조회 결과가 없습니다.", "Y");
+
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showFinishAlertDialog("배송 상세조회 실패", "배송 상세조회 결과가 없습니다.", "Y");
+                    commonHandler.showFinishAlertDialog("배송 상세조회 실패",
+                                                        response.code() +"\n"+ response.message()+"\n\n"+
+                                                                URLDecoder.decode(response.errorBody().string(),"UTF-8"),
+                                                        "Y");
                 }
                 showProgress(false);
             }
-
-
 
             @Override
             public void onFailure(Call<List<DeliveryVO>> call, Throwable t) {
@@ -1568,7 +1570,7 @@ public class DeliveryListDetail extends AppCompatActivity {
 
         service.mDeliveryLiftSave(deliveryLiftSaveVO).enqueue(new Callback<DeliveryLiftSaveVO>() {    //앞 요청VO, CallBack 응답 VO
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<DeliveryLiftSaveVO> call, Response<DeliveryLiftSaveVO> response) {  //둘다 응답 VO
 
                 if (response.isSuccessful()) //응답값이 있다
@@ -1609,13 +1611,17 @@ public class DeliveryListDetail extends AppCompatActivity {
                     showProgress(false);
 
                 } else {
-                    commonHandler.showAlertDialog("상차 완료 실패", "응답결과가 없습니다.");
+
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showAlertDialog("상차 완료 실패", "응답결과가 없습니다.");
+                    commonHandler.showAlertDialog(  "상차 완료 실패",
+                                                    response.code() +"\n"+ response.message()+"\n\n"+
+                                                        URLDecoder.decode(response.errorBody().string(),"UTF-8"));
 
 
                 }
                 showProgress(false);
             }
-
 
             @Override
             public void onFailure(Call<DeliveryLiftSaveVO> call, Throwable t) {
@@ -1624,8 +1630,6 @@ public class DeliveryListDetail extends AppCompatActivity {
 
                 showProgress(false);
             }
-
-
         });
     }
 
@@ -1636,7 +1640,7 @@ public class DeliveryListDetail extends AppCompatActivity {
 
         service.mDeliveryLiftCancel(deliveryLiftCancelVO).enqueue(new Callback<DeliveryLiftCancelVO>() {    //앞 요청VO, CallBack 응답 VO
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<DeliveryLiftCancelVO> call, Response<DeliveryLiftCancelVO> response) {  //둘다 응답 VO
 
                 if (response.isSuccessful()) //응답값이 있다
@@ -1674,7 +1678,12 @@ public class DeliveryListDetail extends AppCompatActivity {
                     showProgress(false);
 
                 } else {
-                    commonHandler.showAlertDialog("상차 취소 실패", "응답결과가 없습니다.");
+
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showAlertDialog("상차 취소 실패", "응답결과가 없습니다.");
+                    commonHandler.showAlertDialog("상차 취소 실패", response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
+
                     showProgress(false);
                 }
                 showProgress(false);
@@ -1692,7 +1701,7 @@ public class DeliveryListDetail extends AppCompatActivity {
     private void mDeliveryListDetailTelUpdate(DeliveryTelVO deliveryTelVO) {    //요청 VO
         service.mDeliveryListDetailTelUpdate(deliveryTelVO).enqueue(new Callback<DeliveryVO>() {    //앞 요청VO, CallBack 응답 VO
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<DeliveryVO> call, Response<DeliveryVO> response) {  //둘다 응답 VO
                 if (response.isSuccessful()) //응답값이 없다
                 {
@@ -1704,7 +1713,12 @@ public class DeliveryListDetail extends AppCompatActivity {
                     }
                     showProgress(false);
                 } else {
-                    commonHandler.showAlertDialog("통화 카운트 저장 실패", ""+"응답결과가 없습니다.");
+
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showAlertDialog("통화 카운트 저장 실패", ""+"응답결과가 없습니다.");
+                    commonHandler.showAlertDialog("통화 카운트 저장 실패", response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
+
                 }
                 showProgress(false);
             }

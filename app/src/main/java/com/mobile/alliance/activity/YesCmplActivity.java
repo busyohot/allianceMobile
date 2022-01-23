@@ -63,6 +63,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
@@ -928,7 +929,7 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
         File tempFile = new File(storageDir+"/"+imageFileName+".jpg");
 
 
-        ImageResizeUtils.resizeFile(tempFile3, tempFile, 1280, true);
+        ImageResizeUtils.resizeFile(tempFile3, tempFile, 1024, true);
         oriTempFile = tempFile;
 
         //Log.d("tempFile getAbsolutePath" , oriTempFile.getAbsolutePath());
@@ -936,7 +937,7 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
          /*
         첫 번째 파라미터에 변형시킬 tempFile 을 넣었습니다.
         두 번째 파라미터에는 변형시킨 파일을 다시 tempFile에 저장해 줍니다.
-        세 번째 파라미터는 이미지의 긴 부분을 1280 사이즈로 리사이징 하라는 의미입니다.
+        세 번째 파라미터는 이미지의 긴 부분을 1024 사이즈로 리사이징 하라는 의미입니다.
         네 번째 파라미터를 통해 카메라에서 가져온 이미지인 경우 카메라의 회전각도를 적용해 줍니다.(앨범에서 가져온 경우에는 회전각도를 적용 시킬 필요가 없겠죠?)
         */
 
@@ -1310,7 +1311,7 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
     private void mYesCmplReasonCombo(YesCmplVO yesCmplVO) {
         service.mYesCmplReasonCombo(yesCmplVO).enqueue(new Callback<List<YesCmplVO>>() {
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<List<YesCmplVO>> call, Response<List<YesCmplVO>> response) {
 
                 if(response.isSuccessful()) //응답값이 있다
@@ -1811,7 +1812,10 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
                     showProgress(false);
                 }
                 else{
-                    commonHandler.showAlertDialog("배송완료 특이사항 조회 실패","응답결과가 없습니다.");
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showAlertDialog("배송완료 특이사항 조회 실패","응답결과가 없습니다.");
+                    commonHandler.showAlertDialog("배송완료 특이사항 조회 실패",response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
                 }
                 showProgress(false);
             }
@@ -1823,17 +1827,12 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
             }
         });
     }
-
-
-
-
-
     YesCmplVO onCreateData;  //화면 열리자마자 불러온데이터 여기에 넣기(여기 넣었다가 나중에 배송완료 처리 완료 버튼 누를때 알림톡 발송 보냄)
     //화면 열리자 마자 불러오기
     private void mYesCmplOnCreate(YesCmplOnCreateVO yesCmplOnCreateVO) {
         service.mYesCmplOnCreate(yesCmplOnCreateVO).enqueue(new Callback<YesCmplVO>() {
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<YesCmplVO> call, Response<YesCmplVO> response) {
 
                 if(response.isSuccessful()) //응답값이 있다
@@ -1843,8 +1842,12 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
                     Log.d("onCreateData",onCreateData.toString());
                 }
                 else{
-
-                    commonHandler.showFinishAlertDialog("배송완료 onCreate 데이터 조회 실패","응답결과가 없거나 여러개 입니다.\n[instMobileMId : "+instMobileMIdValue+"]\n이전화면으로 이동합니다","Y");
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showFinishAlertDialog("배송완료 onCreate 데이터 조회 실패","응답결과가 없거나 여러개 입니다.\n[instMobileMId : "+instMobileMIdValue+"]\n이전화면으로 이동합니다","Y");
+                    commonHandler.showFinishAlertDialog("배송완료 onCreate 데이터 조회 실패",
+                            response.code() +"\n"+ response.message()+"\n\n"+
+                                    URLDecoder.decode(response.errorBody().string(),"UTF-8"),
+                            "Y");
                 }
                 showProgress(false);
             }
@@ -1857,12 +1860,6 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
             }
         });
     }
-
-
-
-
-
-
 
     //텍스트 입력란 활성화 비활성화 넣기
     private void setUseableEditText(EditText et, boolean useable) {
@@ -1904,9 +1901,6 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
             }
         });
     }
-
-
-
 
     //배송완료알림톡 결과를 DB에 저장
     public void YesCmplTalkDb(String sendComplete, String message)
@@ -2019,7 +2013,7 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
     private void mYesCmplSaveStat(YesCmplSaveStatVO yesCmplSaveStatVO) {
         service.mYesCmplSaveStat(yesCmplSaveStatVO).enqueue(new Callback<YesCmplVO>() {
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<YesCmplVO> call, Response<YesCmplVO> response) {
 
                 if(response.isSuccessful()) //응답값이 있다
@@ -2066,7 +2060,13 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
 
                     Button ok_btn = dialogView.findViewById(R.id.successBtn);
                     TextView ok_txt = dialogView.findViewById(R.id.successText);
-                    ok_txt.setText("배송완료 처리 실패\n\n응답결과가 없음");
+
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //ok_txt.setText("배송완료 처리 실패\n\n응답결과가 없음");
+                    ok_txt.setText("배송완료 처리 실패\n"+
+                            response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
+
                     ok_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -2103,9 +2103,6 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
         });
     }
 
-
-
-
     //배송완료 알림톡 발송 결과를 저장하기. 그리고 알림톡 발송 결과 저장이 되던 안되던 다이얼로그는 됐다라고 나옴
 
     private void mYesCmplSaveTalk(YesCmplSaveTalkVO yesCmplSaveTalkVO){
@@ -2128,19 +2125,16 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
                         //배송목록 갱신하기
                         DeliveryListFragment deliveryListFragment = (DeliveryListFragment)DeliveryListFragment._DeliveryListFragment;
                         deliveryListFragment.changeDate();
-
-
                         //상세정보보기 다시 정보 읽기
-
                         DeliveryListDetail deliveryListDetail = (DeliveryListDetail)DeliveryListDetail._DeliveryListDetail;
-
                         deliveryListDetail.deliveryDetailSrch();
                         finish();
                     }
                 });
             }
 
-            @Override public void onFailure(Call<YesCmplVO> call, Throwable t){
+            @Override
+            public void onFailure(Call<YesCmplVO> call, Throwable t){
                 View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_success, null);
                 android.app.AlertDialog.Builder builder =
                         new android.app.AlertDialog.Builder(YesCmplActivity.this);
@@ -2157,12 +2151,8 @@ signFileName.setText(timeStamp +"/"+signFile.getName());
                         //배송목록 갱신하기
                         DeliveryListFragment deliveryListFragment = (DeliveryListFragment)DeliveryListFragment._DeliveryListFragment;
                         deliveryListFragment.changeDate();
-
-
                         //상세정보보기 다시 정보 읽기
-
                         DeliveryListDetail deliveryListDetail = (DeliveryListDetail)DeliveryListDetail._DeliveryListDetail;
-
                         deliveryListDetail.deliveryDetailSrch();
                         finish();
                     }

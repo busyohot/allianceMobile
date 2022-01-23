@@ -8,26 +8,26 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v4.content.ContextCompat;
+
 import android.support.v7.app.AlertDialog;
 
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.UnderlineSpan;
-import android.util.Log;
+
+
+
+
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
+
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.ImageView;
 
 import android.widget.LinearLayout;
-import android.widget.ListView;
+
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +36,7 @@ import com.mobile.alliance.R;
 import com.mobile.alliance.activity.DeliveryListDetail;
 import com.mobile.alliance.activity.DeliveryListViewItem;
 import com.mobile.alliance.activity.MapActivity;
-import com.mobile.alliance.activity.NoCmplActivity;
+
 import com.mobile.alliance.api.CommonHandler;
 import com.mobile.alliance.api.PersistentCookieStore;
 import com.mobile.alliance.api.RetrofitClient;
@@ -44,15 +44,17 @@ import com.mobile.alliance.api.ServiceApi;
 import com.mobile.alliance.entity.delivery.DeliverySeqVO;
 import com.mobile.alliance.entity.delivery.DeliveryTelVO;
 import com.mobile.alliance.entity.delivery.DeliveryVO;
-import com.mobile.alliance.fragment.DeliveryListFragment;
 
-import org.w3c.dom.Text;
+
+
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Arrays;
 
+
+import lombok.SneakyThrows;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -61,7 +63,7 @@ import retrofit2.Response;
 
 public class DeliveryListViewAdapter extends BaseAdapter {
 
-    public static final int TYPE_CLASS_NUMBER = 0x00000002; //EditText 입력창에 숫자만 넣게하기
+
             
             
     private ArrayList<DeliveryListViewItem> arrayList = new ArrayList<>();
@@ -457,7 +459,7 @@ public class DeliveryListViewAdapter extends BaseAdapter {
     private void mDeliverySeqUpdate(DeliverySeqVO deliverySeqVO) {    //요청 VO
         service.mDeliverySeqUpdate(deliverySeqVO).enqueue(new Callback<DeliveryVO>() {    //앞 요청VO, CallBack 응답 VO
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<DeliveryVO> call, Response<DeliveryVO> response) {  //둘다 응답 VO
 
                 if(response.isSuccessful()) //응답값이 없다
@@ -473,7 +475,9 @@ public class DeliveryListViewAdapter extends BaseAdapter {
                     }
                 }
                 else{
-                    commonHandler.showAlertDialog("순번 변경 실패","응답결과가 없습니다.");
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    commonHandler.showAlertDialog("순번 변경 실패",response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
                 }
                 showProgress(false);
             }
@@ -490,7 +494,7 @@ public class DeliveryListViewAdapter extends BaseAdapter {
     private void mDeliveryTelUpdate(DeliveryTelVO deliveryTelVO) {    //요청 VO
         service.mDeliveryTelUpdate(deliveryTelVO).enqueue(new Callback<DeliveryVO>() {    //앞 요청VO, CallBack 응답 VO
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<DeliveryVO> call, Response<DeliveryVO> response) {  //둘다 응답 VO
 
                 if(response.isSuccessful()) //응답값이 없다
@@ -506,7 +510,9 @@ public class DeliveryListViewAdapter extends BaseAdapter {
                     }
                 }
                 else{
-                    commonHandler.showAlertDialog("통화 카운트 저장 실패","응답결과가 없습니다.");
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    commonHandler.showAlertDialog("통화 카운트 저장 실패",response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
                 }
                 showProgress(false);
             }

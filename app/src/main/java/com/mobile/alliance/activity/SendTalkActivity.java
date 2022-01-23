@@ -37,6 +37,7 @@ import com.mobile.alliance.fragment.DeliveryListFragment;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -484,17 +485,11 @@ String completeMsg="";
 
                     }
                 });
-
-
             }
-
         });
-
     }
 
-
-
-                    ArrayList<TalkVO> result = new ArrayList<TalkVO>();
+    ArrayList<TalkVO> result = new ArrayList<TalkVO>();
     //알림톡 발송
     private void mSendTalk(ArrayList<SendTalkVO> sendTalkVO) {    //요청 VO
 
@@ -517,8 +512,6 @@ String completeMsg="";
                 showProgress(false);
             }
 
-
-
             @Override
             public void onFailure(Call<ArrayList<TalkVO>> call, Throwable t) {
 
@@ -526,12 +519,7 @@ String completeMsg="";
 
                 showProgress(false);
             }
-
-
-
         });
-
-
     }
     //상태코드 상관없이 그냥 알림톡 발송의 성공여부만 저장함
     public void SaveTalkDb(String sendComplete, String message)
@@ -644,27 +632,17 @@ String completeMsg="";
 
                         @SneakyThrows @Override
                         public void onClick(View v) {
-
-
                             alertDialog.dismiss();
                             //배송목록 갱신하기
                             DeliveryListFragment deliveryListFragment = (DeliveryListFragment)DeliveryListFragment._DeliveryListFragment;
                             deliveryListFragment.changeDate();
-
-
                             //상세정보보기 다시 정보 읽기
-
                             DeliveryListDetail deliveryListDetail = (DeliveryListDetail)DeliveryListDetail._DeliveryListDetail;
-
                             deliveryListDetail.deliveryDetailSrch();
-
-
-
                         }
                     });
                 }
             }
-
         });
     }
 
@@ -672,7 +650,7 @@ String completeMsg="";
     private void mSaveStat(SaveStatVO saveStatVO) {    //요청 VO
 
         service.mSaveStat(saveStatVO).enqueue(new Callback<TalkVO>() {    //앞 요청VO, CallBack 응답 VO
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<TalkVO> call, Response<TalkVO> response) {  //둘다 응답 VO
                 showProgress(false);
                 //결과값이 있을떄
@@ -699,7 +677,6 @@ String completeMsg="";
 
                             @SneakyThrows @Override
                             public void onClick(View v){
-
 
                                 alertDialog.dismiss();
                                 //배송목록 갱신하기
@@ -741,11 +718,8 @@ String completeMsg="";
                         TextView ok_txt = dialogView.findViewById(R.id.successText);
                         ok_txt.setText("해피콜 결과 저장 실패.");
                         ok_btn.setOnClickListener(new View.OnClickListener() {
-
                             @SneakyThrows @Override
                             public void onClick(View v){
-
-
                                 alertDialog.dismiss();
                                 //배송목록 갱신하기
                                 DeliveryListFragment deliveryListFragment =
@@ -753,15 +727,11 @@ String completeMsg="";
                                 deliveryListFragment.changeDate();
 
                                 //상세정보보기 다시 정보 읽기
-
                                 DeliveryListDetail deliveryListDetail =
                                         (DeliveryListDetail) DeliveryListDetail._DeliveryListDetail;
 
                                 deliveryListDetail.deliveryDetailSrch();
-
-
                             }
-
                         });
                     }
                 }
@@ -780,29 +750,27 @@ String completeMsg="";
 
                     Button ok_btn = dialogView.findViewById(R.id.successBtn);
                     TextView ok_txt = dialogView.findViewById(R.id.successText);
-                    ok_txt.setText("해피콜 결과 저장 실패..");
+
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //ok_txt.setText("해피콜 결과 저장 실패..");
+                    ok_txt.setText("해피콜 결과 저장 실패\n"+
+                            response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
+
                     ok_btn.setOnClickListener(new View.OnClickListener() {
 
                         @SneakyThrows @Override
                         public void onClick(View v){
-
-
                             alertDialog.dismiss();
                             //배송목록 갱신하기
                             DeliveryListFragment deliveryListFragment =
                                     (DeliveryListFragment) DeliveryListFragment._DeliveryListFragment;
                             deliveryListFragment.changeDate();
-
                             //상세정보보기 다시 정보 읽기
-
                             DeliveryListDetail deliveryListDetail =
                                     (DeliveryListDetail) DeliveryListDetail._DeliveryListDetail;
-
                             deliveryListDetail.deliveryDetailSrch();
-
-
                         }
-
                     });
                 }
             }
@@ -822,35 +790,26 @@ String completeMsg="";
 
                 Button ok_btn = dialogView.findViewById(R.id.successBtn);
                 TextView ok_txt = dialogView.findViewById(R.id.successText);
-                ok_txt.setText("해피콜 결과 저장 실패...");
+                ok_txt.setText("해피콜 결과 저장 실패.\n\n접속실패\n"+t.getMessage());
                 ok_btn.setOnClickListener(new View.OnClickListener() {
 
                     @SneakyThrows @Override
                     public void onClick(View v) {
-
 
                         alertDialog.dismiss();
                         //배송목록 갱신하기
                         DeliveryListFragment deliveryListFragment = (DeliveryListFragment)DeliveryListFragment._DeliveryListFragment;
                         deliveryListFragment.changeDate();
 
-
                         //상세정보보기 다시 정보 읽기
-
                         DeliveryListDetail deliveryListDetail = (DeliveryListDetail)DeliveryListDetail._DeliveryListDetail;
-
                         deliveryListDetail.deliveryDetailSrch();
-
-
-
                     }
                 });
             }
 
         });
     }
-
-
 
     //화면이 열리자 마자 조회를 함
     private void mSrchTalk(SrchTalkVO srchTalkVO) {
@@ -867,16 +826,7 @@ String completeMsg="";
 
                     sendTalkMsg.setText(result.getDlvyRqstMsg());
 
-
-
-
                     //배송예정일 넣기
-
-                    //dlvyDtText.setText(getDate());
-
-
-                    //dlvyDtText.setText(instDtValue);
-
                     dlvyDtText.setText(getInstDt());
 
                     dlvyDtText.setOnClickListener(new View.OnClickListener() {
@@ -892,7 +842,6 @@ String completeMsg="";
                             showDate();
                         }
                     });
-
 
                     fromDlvyTime.setText("08" + " 시");
                     //fromDlvyTime.setText(getTime() + " 시");   //원본
@@ -918,8 +867,6 @@ String completeMsg="";
                     });
 
                     /////////////////알림톡 메세지 보낼 부분
-
-
                     talkUserId.setText(result.getUserid());
                     talkMessageType.setText(result.getMessageType());
                     talkPhn.setText(result.getPhn());
@@ -934,14 +881,16 @@ String completeMsg="";
                     talkSmslmstit.setText(result.getSmsLmsTit());
                     talkSmsonly.setText(result.getSmsOnly());
 
-
                     talkInstMobileMId.setText(result.getInstMobileMId());
                     talkTblSoMId.setText(result.getTblSoMId());
 
-
-
                 } else {
-                    commonHandler.showFinishAlertDialog("내용조회 실패","내용조회 결과가 없습니다.","Y");
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showFinishAlertDialog("내용조회 실패","내용조회 결과가 없습니다.","Y");
+                    commonHandler.showFinishAlertDialog("내용조회 실패",
+                            response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"),
+                            "Y");
                 }
                 showProgress(false);
             }
@@ -951,15 +900,8 @@ String completeMsg="";
                 commonHandler.showAlertDialog("내용조회 실패", "접속실패\n" + t.getMessage());
                 showProgress(false);
             }
-
         });
     }
-
-
-
-
-
-
 
     private void showProgress(boolean show) {
         mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);

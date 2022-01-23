@@ -64,6 +64,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
@@ -1059,14 +1060,14 @@ public class NoCmplActivity extends AppCompatActivity {
 
             //File tempFile = new File(storageDir+"/"+imageFileName+tempFile3.getName());
             File tempFile = new File(storageDir+"/"+imageFileName+".jpg");
-            ImageResizeUtils.resizeFile(tempFile3, tempFile, 1280, true);
+            ImageResizeUtils.resizeFile(tempFile3, tempFile, 1024, true);
             oriTempFile = tempFile;
 
 
          /*
         첫 번째 파라미터에 변형시킬 tempFile 을 넣었습니다.
         두 번째 파라미터에는 변형시킨 파일을 다시 tempFile에 저장해 줍니다.
-        세 번째 파라미터는 이미지의 긴 부분을 1280 사이즈로 리사이징 하라는 의미입니다.
+        세 번째 파라미터는 이미지의 긴 부분을 1024 사이즈로 리사이징 하라는 의미입니다.
         네 번째 파라미터를 통해 카메라에서 가져온 이미지인 경우 카메라의 회전각도를 적용해 줍니다.(앨범에서 가져온 경우에는 회전각도를 적용 시킬 필요가 없겠죠?)
         */
 
@@ -1556,7 +1557,7 @@ public class NoCmplActivity extends AppCompatActivity {
     private void mNoCmplReasonCombo(NoCmplVO noCmplVO) {
         service.mNoCmplReasonCombo(noCmplVO).enqueue(new Callback<List<NoCmplVO>>() {
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<List<NoCmplVO>> call, Response<List<NoCmplVO>> response) {
 
                 if(response.isSuccessful()) //응답값이 없다
@@ -1686,7 +1687,12 @@ public class NoCmplActivity extends AppCompatActivity {
                     alertDialog.show();
                     Button ok_btn = dialogView.findViewById(R.id.successBtn);
                     TextView ok_txt = dialogView.findViewById(R.id.successText);
-                    ok_txt.setText("미마감 사유 조회 실패\n\n조회 응답결과가 없습니다");
+
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //ok_txt.setText("미마감 사유 조회 실패\n\n조회 응답결과가 없습니다");
+                    ok_txt.setText("미마감 사유 조회 실패\n\n"+response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
+
                     ok_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -1728,7 +1734,7 @@ public class NoCmplActivity extends AppCompatActivity {
     private void mNoCmplOnCreate(NoCmplOnCreateVO noCmplOnCreateVO) {
         service.mNoCmplOnCreate(noCmplOnCreateVO).enqueue(new Callback<NoCmplVO>() {
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<NoCmplVO> call, Response<NoCmplVO> response) {
 
                 if(response.isSuccessful()) //응답값이 있다
@@ -1746,7 +1752,14 @@ public class NoCmplActivity extends AppCompatActivity {
                     alertDialog.show();
                     Button ok_btn = dialogView.findViewById(R.id.successBtn);
                     TextView ok_txt = dialogView.findViewById(R.id.successText);
-                    ok_txt.setText("미마감 onCreate 데이터 조회 실패\n\n응답결과가 없거나 여러개 입니다.\n[instMobileMId : "+instMobileMIdValue+"]\n\n이전화면으로 이동합니다");
+
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //ok_txt.setText("미마감 onCreate 데이터 조회 실패\n\n응답결과가 없거나 여러개 입니다.\n[instMobileMId : "+instMobileMIdValue+"]\n\n이전화면으로 이동합니다");
+                    ok_txt.setText("미마감 onCreate 데이터 조회 실패\n" +
+                                    response.code() +"\n"+ response.message()+"\n\n"+
+                                    URLDecoder.decode(response.errorBody().string(),"UTF-8") +
+                                "\n\n이전화면으로 이동합니다");
+
                     ok_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -1784,7 +1797,7 @@ public class NoCmplActivity extends AppCompatActivity {
     private void mNoCmplSaveStat(NoCmplSaveStatVO noCmplSaveVO) {
         service.mNoCmplSaveStat(noCmplSaveVO).enqueue(new Callback<NoCmplVO>() {
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<NoCmplVO> call, Response<NoCmplVO> response) {
 
                 if(response.isSuccessful()) //응답값이 있다
@@ -1831,7 +1844,14 @@ public class NoCmplActivity extends AppCompatActivity {
 
                     Button ok_btn = dialogView.findViewById(R.id.successBtn);
                     TextView ok_txt = dialogView.findViewById(R.id.successText);
-                    ok_txt.setText("미마감 처리 실패\n\n응답결과가 없음");
+
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //ok_txt.setText("미마감 처리 실패\n\n응답결과가 없음");
+                    ok_txt.setText("미마감 처리 실패\n"+
+                                    response.code() +"\n"+ response.message()+"\n\n"+
+                                    URLDecoder.decode(response.errorBody().string(),"UTF-8")
+                    );
+
                     ok_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -1870,7 +1890,7 @@ public class NoCmplActivity extends AppCompatActivity {
 
 
 
-    //미마감 알림톡 발송 결과를 저장하기. 그리고 저장이 되던 안되던 다이얼로그는 됐다라고 나옴
+    //미마감 알림톡 발송 결과를 저장하기. 그리고 저장이 되던 안되던 다이얼로그는 됐다라고 나옴. 발송결과가 저장이 안되도 넘어간다
 
     private void mNoCmplSaveTalk(NoCmplSaveTalkVO noCmplSaveTalkVO){
         service.mNoCmplSaveTalk(noCmplSaveTalkVO).enqueue(new Callback<NoCmplVO>() {
@@ -1893,18 +1913,16 @@ public class NoCmplActivity extends AppCompatActivity {
                         DeliveryListFragment deliveryListFragment = (DeliveryListFragment)DeliveryListFragment._DeliveryListFragment;
                         deliveryListFragment.changeDate();
 
-
                         //상세정보보기 다시 정보 읽기
-
                         DeliveryListDetail deliveryListDetail = (DeliveryListDetail)DeliveryListDetail._DeliveryListDetail;
-
                         deliveryListDetail.deliveryDetailSrch();
                         finish();
                     }
                 });
             }
 
-            @Override public void onFailure(Call<NoCmplVO> call, Throwable t){
+            @Override
+            public void onFailure(Call<NoCmplVO> call, Throwable t){
                 View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_success, null);
                 android.app.AlertDialog.Builder builder =
                         new android.app.AlertDialog.Builder(NoCmplActivity.this);
@@ -1922,11 +1940,8 @@ public class NoCmplActivity extends AppCompatActivity {
                         DeliveryListFragment deliveryListFragment = (DeliveryListFragment)DeliveryListFragment._DeliveryListFragment;
                         deliveryListFragment.changeDate();
 
-
                         //상세정보보기 다시 정보 읽기
-
                         DeliveryListDetail deliveryListDetail = (DeliveryListDetail)DeliveryListDetail._DeliveryListDetail;
-
                         deliveryListDetail.deliveryDetailSrch();
                         finish();
                     }
@@ -2066,21 +2081,15 @@ public class NoCmplActivity extends AppCompatActivity {
 
     //알림톡 발송
     private void mSendTalk(ArrayList<SendTalkVO> sendTalkVO) {    //요청 VO
-
         serviceTalk.mSendTalk(sendTalkVO).enqueue(new Callback<ArrayList<TalkVO>>() {    //앞 요청VO, CallBack 응답 VO
-
             @Override
             public void onResponse(Call<ArrayList<TalkVO>> call, Response<ArrayList<TalkVO>> response) {  //둘다 응답 VO
-
                 if(response.isSuccessful() ) //응답값이 있다
                 {
                     //알림톡 결과를 받은후에
                     List<TalkVO> resultSendTalk  = response.body();
-
                     //// 2. 상태값과 상관없이   알림톡을 발송했고 그 결과가 success 일때 (발송 성공일때) 알림톡 발송 내역을 저장(결과코드를 포함하여저장)
                     for(int i=0;i<resultSendTalk.size();i++){
-                        //XCmplTalkDb(resultSendTalk.get(i).getCode(), resultSendTalk.get(i).getMessage());
-
                         String phoneNumber; //알림톡 받는사람 전화번호
                         try {
                             phoneNumber = resultSendTalk.get(i).getData().getPhn();
@@ -2090,7 +2099,6 @@ public class NoCmplActivity extends AppCompatActivity {
                         }
                         XCmplTalkDb(resultSendTalk.get(i).getCode(), resultSendTalk.get(i).getMessage(), phoneNumber);
                     }
-                    //XCmplTalkDb(resultSendTalk.get(0).getCode(), resultSendTalk.get(0).getMessage());
                 }
                 else{
                     XCmplTalkDb("N","onResponse_noResult","01000000000");
@@ -2100,9 +2108,7 @@ public class NoCmplActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<TalkVO>> call, Throwable t) {
-
                 XCmplTalkDb("N","onFailure","01000000000");
-
                 showProgress(false);
             }
         });

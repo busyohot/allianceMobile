@@ -18,7 +18,9 @@ import com.mobile.alliance.api.ServiceApi;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.URLDecoder;
 
+import lombok.SneakyThrows;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -97,7 +99,7 @@ public class StandardActivity extends AppCompatActivity {
     private void startLogin(LoginVO loginVO) {
          service.mLogin(loginVO).enqueue(new Callback<LoginVO>() {
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<LoginVO> call, Response<LoginVO> response) {
 
                 if(response.isSuccessful()) //응답값이 없다
@@ -114,7 +116,10 @@ public class StandardActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    commonHandler.showAlertDialog("로그인 실패","로그인 응답결과가 없습니다.");
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showAlertDialog("로그인 실패","로그인 응답결과가 없습니다.");
+                    commonHandler.showAlertDialog("로그인 실패",response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
                 }
                 showProgress(false);
             }
@@ -128,13 +133,7 @@ public class StandardActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void showProgress(boolean show) {
         mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
-
-
-
-
 }

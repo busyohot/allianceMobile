@@ -1,8 +1,5 @@
 package com.mobile.alliance.activity;
 
-
-
-
 import android.content.Intent;
 
 import android.content.SharedPreferences;
@@ -36,14 +33,15 @@ import com.mobile.alliance.entity.LoginVO;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.URLDecoder;
 
+import lombok.SneakyThrows;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 public class FirstActivity extends AppCompatActivity {
 
@@ -63,7 +61,6 @@ public class FirstActivity extends AppCompatActivity {
     //공통
     CommonHandler commonHandler = new CommonHandler(this);
 
-
     //내부에 데이터 저장하는것
     static private String SHARE_NAME = "SHARE_PREF";
     static SharedPreferences sharePref = null;
@@ -74,12 +71,8 @@ public class FirstActivity extends AppCompatActivity {
     static SharedPreferences loginPref = null;
     static SharedPreferences.Editor loginEditor = null;
 
-
-    //0505
     static SharedPreferences cookiePrefs = null;
     private static final String COOKIE_PREFS = "CookiePrefsFile";
-
-
 
     EditText userId;
     EditText userPw;
@@ -100,9 +93,7 @@ public class FirstActivity extends AppCompatActivity {
         sharePref = getSharedPreferences(SHARE_NAME, MODE_PRIVATE);
         editor = sharePref.edit();
 
-        //0505
         cookiePrefs = getSharedPreferences(COOKIE_PREFS, 0);
-        //Log.d("cookiePrefs",cookiePrefs.getString("Cookie",""));
 
         //자동로그인 데이터 저장하는것
         loginPref = getSharedPreferences(LOGIN_SHARE, MODE_PRIVATE);
@@ -129,7 +120,6 @@ public class FirstActivity extends AppCompatActivity {
        }
        catch (Exception e){}
 
-
         //api 이용시 쿠키전달
         PersistentCookieStore cookieStore = new PersistentCookieStore(this);
         //CookieManager cookieManager  = new CookieManager(cookieStore, CookiePolicy.ACCEPT_ALL);
@@ -146,10 +136,8 @@ public class FirstActivity extends AppCompatActivity {
 
         mProgressView = (ProgressBar) findViewById(R.id.fListProgress);
 
-
         userId = (EditText)findViewById(R.id.userId);
         userId.setText(sharePref.getString("PhoneNum",""));
-
 
         userPw = (EditText)findViewById(R.id.userPw);
         login_button = findViewById(R.id.login_button);
@@ -171,14 +159,11 @@ public class FirstActivity extends AppCompatActivity {
                 phoneCheck.putExtra("loginId",userId.getText().toString());
                 startActivity(phoneCheck);  //다음 액티비티를 열고
                 FirstActivity.this.finish();     //이 액티비티를 닫음
-
             }
         });
 
         userId.setText(loginPref.getString("loginUserId",sharePref.getString("PhoneNum","")));
         userPw.setText(loginPref.getString("loginUserPw",""));
-
-
 
         if(loginPref.getBoolean("loginAuto",false)) //자동로그인을 체크해서 저장된값이 있다면
         {
@@ -187,7 +172,6 @@ public class FirstActivity extends AppCompatActivity {
             loginAuto.setChecked(true);
             startLogin(new LoginVO("A", userId.getText().toString(), userPw.getText().toString() , sharePref.getString("cnntIp","")));
             showProgress(true);
-
         }
         else
         {
@@ -213,16 +197,13 @@ public class FirstActivity extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(loginPref.getBoolean("loginAuto",false)) //자동로그인을 체크체크가 되어있다면
                 {
-
                     loginEditor.putString("loginUserId",userId.getText().toString());
                     loginEditor.putString("loginUserPw",userPw.getText().toString());
                     loginEditor.putBoolean("loginAuto",true);
                     loginEditor.apply();
                 }
-
                 startLogin(new LoginVO("A", userId.getText().toString(), userPw.getText().toString() , sharePref.getString("cnntIp","")));
                 showProgress(true);
             }
@@ -236,18 +217,14 @@ public class FirstActivity extends AppCompatActivity {
         backPressCloseHandler.onBackPressed();
     }
 
-
     private void startLogin(LoginVO loginVO) {
          service.mLogin(loginVO).enqueue(new Callback<LoginVO>() {
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<LoginVO> call, Response<LoginVO> response) {
-                 if(response.isSuccessful()) //응답값이 없다
+                if(response.isSuccessful()) //응답값이 없다
                 {
-
                     LoginVO result = response.body();
-
                     if(result.getRtnYn().equals("Y")) {
-
                         if(result.getMobileGrntCd() != null && !result.getMobileGrntCd().equals("")) {
                             //내부저장소에 값 넣기
                             editor.putBoolean("isShare", true); //저장할때 true // 수정할때 flase
@@ -283,8 +260,6 @@ public class FirstActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            //showConfirmDialog("로그인 실패", result.getRtnMsg());
-
                             View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_success, null);
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(FirstActivity.this);
@@ -299,21 +274,15 @@ public class FirstActivity extends AppCompatActivity {
                             ok_txt.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START); //글자를 왼쪽 정렬
                             ok_txt.setText("로그인에 실패하였습니다.\n모바일 접속권한을 확인하세요.");
                             ok_btn.setOnClickListener(new View.OnClickListener() {
-
                                 @Override
                                 public void onClick(View v) {
-
                                     alertDialog.dismiss();
-
                                 }
                             });
                         }
-
                     }
                     else
                     {
-                        //showConfirmDialog("로그인 실패", result.getRtnMsg());
-
                         View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_success, null);
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(FirstActivity.this);
@@ -328,19 +297,14 @@ public class FirstActivity extends AppCompatActivity {
                         ok_txt.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START); //글자를 왼쪽 정렬
                         ok_txt.setText("로그인에 실패하였습니다.\n아이디 또는 암호를 확인하세요.");
                         ok_btn.setOnClickListener(new View.OnClickListener() {
-
                             @Override
                             public void onClick(View v) {
-
                                 alertDialog.dismiss();
-
                             }
                         });
                     }
                 }
                 else{
-                    //showConfirmDialog("로그인 실패","로그인 응답결과가 없습니다.");
-
                     View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_success, null);
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(FirstActivity.this);
@@ -353,24 +317,25 @@ public class FirstActivity extends AppCompatActivity {
                     Button ok_btn = dialogView.findViewById(R.id.successBtn);
                     TextView ok_txt = dialogView.findViewById(R.id.successText);
                     ok_txt.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START); //글자를 왼쪽 정렬
-                    ok_txt.setText("로그인에 실패하였습니다.\n로그인 응답결과가 없습니다.");
-                    ok_btn.setOnClickListener(new View.OnClickListener() {
 
+
+                     //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //ok_txt.setText("로그인에 실패하였습니다.\n로그인 응답결과가 없습니다.");
+                     ok_txt.setText("로그인에 실패하였습니다.\n"+response.code() +"\n"+ response.message()+"\n\n"+
+                             URLDecoder.decode(response.errorBody().string(),"UTF-8"));
+
+                    ok_btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
                             alertDialog.dismiss();
-
                         }
                     });
-
                 }
                 showProgress(false);
             }
 
             @Override
             public void onFailure(Call<LoginVO> call, Throwable t) {
-                //showConfirmDialog("로그인 실패","접속실패\n"+t.getMessage());
 
                 View dialogView = getLayoutInflater().inflate(R.layout.custom_dial_success, null);
 
@@ -386,16 +351,11 @@ public class FirstActivity extends AppCompatActivity {
                 ok_txt.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START); //글자를 왼쪽 정렬
                 ok_txt.setText("로그인에 실패하였습니다.\n접속실패\n"+t.getMessage());
                 ok_btn.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View v) {
-
                         alertDialog.dismiss();
-
                     }
                 });
-
-
                 showProgress(false);
             }
         });
@@ -412,9 +372,6 @@ public class FirstActivity extends AppCompatActivity {
                 android.util.Log.e("httpLog :", message + "");
             }
         });
-
         return interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
     }
-
-    
 }

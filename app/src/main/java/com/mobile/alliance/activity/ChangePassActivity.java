@@ -29,9 +29,11 @@ import com.mobile.alliance.entity.LoginVO;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.URLDecoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import lombok.SneakyThrows;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -61,12 +63,9 @@ public class ChangePassActivity extends AppCompatActivity {
     CommonHandler commonHandler;
     Intent intent;
 
-
-
     EditText passNoChk,passNew,passNewChk,passIdChk;
     ImageView backPhn2;
     Button passChkBtn;
-
 
     String loginIdValue = "";
 
@@ -89,7 +88,6 @@ public class ChangePassActivity extends AppCompatActivity {
         CookieManager cookieManager = new CookieManager();
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
 
-
         client = new OkHttpClient
                 .Builder()
                 .cookieJar(new JavaNetCookieJar(cookieManager))
@@ -97,17 +95,12 @@ public class ChangePassActivity extends AppCompatActivity {
                 .addInterceptor(commonHandler.httpLoggingInterceptor())
                 .build();
 
-
         service = RetrofitClient.getClient(client).create(ServiceApi.class);
-
         intent = getIntent();
 
         //내부에 데이터 저장하는것
         sharePref = getSharedPreferences(SHARE_NAME, MODE_PRIVATE);
         editor = sharePref.edit();
-
-
-        /************************************************************/
 
         passNoChk = (EditText) findViewById(R.id.passNoChk);
         passNoChk.setText(sharePref.getString("PhoneNum", ""));
@@ -116,17 +109,14 @@ public class ChangePassActivity extends AppCompatActivity {
         passIdChk = (EditText) findViewById(R.id.passIdChk);
         passIdChk.setText(loginIdValue);
 
-        Toast.makeText(getApplicationContext(), "ChangePassActivity2 loginId : " + passIdChk.getText().toString(),Toast.LENGTH_SHORT);
-
+        //Toast.makeText(getApplicationContext(), "ChangePassActivity2 loginId : " + passIdChk.getText().toString(),Toast.LENGTH_SHORT);
 
         backPhn2 = (ImageView) findViewById(R.id.backPhn2);
-
 
         passNew     =   (EditText) findViewById(R.id.passNew);  //비밀번호
         passNewChk  =   (EditText) findViewById(R.id.passNewChk);   //비밀번호 확인
 
         passChkBtn = (Button) findViewById(R.id.passChkBtn);
-
 
         mProgressView = (ProgressBar) findViewById(R.id.pwProg);
 
@@ -141,7 +131,6 @@ public class ChangePassActivity extends AppCompatActivity {
                 ChangePassActivity.this.finish();     //이 액티비티를 닫음
             }
         });
-
 
         //화면 아래 확인 버튼
         passChkBtn.setOnClickListener(new View.OnClickListener() {
@@ -182,8 +171,6 @@ public class ChangePassActivity extends AppCompatActivity {
             }
         });
 
-
-
         passNewChk.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -206,14 +193,7 @@ public class ChangePassActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
-
-
-
-
 
     @Override
     public void onBackPressed() {
@@ -223,8 +203,6 @@ public class ChangePassActivity extends AppCompatActivity {
         startActivity(phoneCheck);  //다음 액티비티를 열고
         ChangePassActivity.this.finish();     //이 액티비티를 닫음
     }
-
-
 
     public boolean textValidate(String str) {
         String Passwrod_PATTERN = "^((?=.*[a-zA-Z]+)|(?=.*[0-9]+)|(?=.*\\W)).{4,12}$";
@@ -239,14 +217,9 @@ public class ChangePassActivity extends AppCompatActivity {
         mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
-
-
-
-
-
     private void mChangePwSend(LoginPwChangeVO loginPwChangeVO){
         service.mChangePwSend(loginPwChangeVO).enqueue(new Callback<LoginVO>() {
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<LoginVO> call, Response<LoginVO> response){
                 if(response.isSuccessful()) //응답값이 있다
                 {
@@ -267,13 +240,10 @@ public class ChangePassActivity extends AppCompatActivity {
                             TextView ok_txt = dialogView.findViewById(R.id.successText);
                             ok_txt.setText("비밀번호 성공");
                             ok_btn.setOnClickListener(new View.OnClickListener() {
-
                                 @Override
                                 public void onClick(View v) {
-
                                     alertDialog.dismiss();
                                     Intent first = new Intent(ChangePassActivity.this, FirstActivity.class);
-
                                     startActivity(first);  //다음 액티비티를 열고
                                     ChangePassActivity.this.finish();     //이 액티비티를 닫음
                                 }
@@ -286,7 +256,10 @@ public class ChangePassActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        commonHandler.showAlertDialog("비밀번호 변경실패", "비밀번호 변경 응답결과가 없습니다.");
+                        //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                        //commonHandler.showAlertDialog("비밀번호 변경실패", "비밀번호 변경 응답결과가 없습니다.");
+                        commonHandler.showAlertDialog("비밀번호 변경실패", response.code() +"\n"+ response.message()+"\n\n"+
+                                URLDecoder.decode(response.errorBody().string(),"UTF-8"));
                     }
                 showProgress(false);
             }
@@ -296,7 +269,6 @@ public class ChangePassActivity extends AppCompatActivity {
                 commonHandler.showAlertDialog("비밀번호 변경실패", "접속실패\n" + t.getMessage());
                 showProgress(false);
             }
-
         });
     }
 }

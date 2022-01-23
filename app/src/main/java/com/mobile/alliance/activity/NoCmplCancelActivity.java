@@ -1,7 +1,7 @@
 package com.mobile.alliance.activity;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 
@@ -16,10 +16,10 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
+
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -51,6 +51,7 @@ import java.net.CookieManager;
 import java.net.CookiePolicy;
 
 
+import java.net.URLDecoder;
 import java.util.List;
 
 import it.sauronsoftware.ftp4j.FTPClient;
@@ -447,11 +448,8 @@ public class NoCmplCancelActivity extends AppCompatActivity {
 
     //미마감 사유 목록 불러와서 표시 하는것
     private void mNoCmplReasonCombo(NoCmplVO noCmplVO) {
-
-
         service.mNoCmplReasonCombo(noCmplVO).enqueue(new Callback<List<NoCmplVO>>() {
-
-
+            @SneakyThrows
             @Override
             public void onResponse(Call<List<NoCmplVO>> call, Response<List<NoCmplVO>> response) {
 
@@ -501,30 +499,29 @@ public class NoCmplCancelActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    commonHandler.showAlertDialog("미마감 사유 조회 실패","응답결과가 없습니다.");
+
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showAlertDialog("미마감 사유 조회 실패","응답결과가 없습니다.");
+                    commonHandler.showAlertDialog("미마감 사유 조회 실패",response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
                 }
                 showProgress(false);
             }
 
             @Override
             public void onFailure(Call<List<NoCmplVO>> call, Throwable t) {
-
                 commonHandler.showAlertDialog("미마감 사유 조회 실패","접속실패\n"+t.getMessage());
                 showProgress(false);
             }
         });
     }
 
-
-
-
-///////////////05050505
     NoCmplVO onCreateData;  //화면 열리자마자 불러온데이터 여기에 넣기(여기 넣었다가 나중에 미마감 처리 완료 버튼 누를때 알림톡 발송 보냄)
     //화면 열리자 마자 불러오기
     private void mNoCmplOnCreate(NoCmplOnCreateVO noCmplOnCreateVO) {
         service.mNoCmplOnCreate(noCmplOnCreateVO).enqueue(new Callback<NoCmplVO>() {
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<NoCmplVO> call, Response<NoCmplVO> response) {
 
                 if(response.isSuccessful()) //응답값이 있다
@@ -597,11 +594,6 @@ public class NoCmplCancelActivity extends AppCompatActivity {
                             //picAddImg03Cancel.setVisibility(View.INVISIBLE);
                             picAddImg03Cancel.setImageBitmap(null);
                         }
-
-
-
-
-
                     if(result.getImg4() != null  && !result.getImg4().equals(""))
                     {
                         try{
@@ -665,18 +657,15 @@ public class NoCmplCancelActivity extends AppCompatActivity {
                                     .execute(textValueHandler.HTTP_HOST + result.getSignImg());
                             noSignCancelUri.setText(textValueHandler.HTTP_HOST + result.getSignImg());
                             noSignCancelFileName.setText(result.getSignImg());
-
-
-
-
                         }  catch(Exception e){
                             e.printStackTrace();
                             noSignatureCancelPad.setVisibility(View.INVISIBLE);
                             Log.d(TAG,"getSignImg catch : " + textValueHandler.HTTP_HOST + result.getSignImg());
                         }
-                    }else{noSignatureCancelPad.setVisibility(View.INVISIBLE);
-                        Log.d(TAG,"getSignImg else : " + textValueHandler.HTTP_HOST + result.getSignImg());}
-
+                    }else{
+                        noSignatureCancelPad.setVisibility(View.INVISIBLE);
+                        Log.d(TAG,"getSignImg else : " + textValueHandler.HTTP_HOST + result.getSignImg());
+                    }
 
                     //미마감 사유
                     for(int q=0;q<resultCheck.size();q++)
@@ -700,17 +689,23 @@ public class NoCmplCancelActivity extends AppCompatActivity {
                     }
                     //메모
                     noCmplMemoCancel.setText(result.getMemo());
-
                 }
                 else{
-                    commonHandler.showToast("미마감 onCreate 데이터 조회 실패\n응답결과가 없음",0,17,17);
+                    //20220120 정연호 수정
+                    //commonHandler.showToast("미마감 onCreate 데이터 조회 실패\n응답결과가 없음",0,17,17);
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showAlertDialog("미마감 처리 취소 실패","응답결과가 없음");
+                    commonHandler.showAlertDialog("미마감 처리 취소 실패",response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
                 }
                 showProgress(false);
             }
 
             @Override
             public void onFailure(Call<NoCmplVO> call, Throwable t) {
-                commonHandler.showToast("미마감 onCreate 데이터 조회 실패\n접속실패\n"+t.getMessage(),0,17,17);
+                //20220120 정연호 수정
+                //commonHandler.showToast("미마감 onCreate 데이터 조회 실패\n접속실패\n"+t.getMessage(),0,17,17);
+                commonHandler.showAlertDialog("미마감 onCreate 데이터 조회 실패","접속실패\n"+t.getMessage());
                 showProgress(false);
             }
         });
@@ -723,7 +718,7 @@ public class NoCmplCancelActivity extends AppCompatActivity {
 
         service.mNoCmplDel(noCmplDelVO).enqueue(new Callback<NoCmplVO>() {
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<NoCmplVO> call, Response<NoCmplVO> response) {
 
                 if(response.isSuccessful()) //응답값이 있다
@@ -772,7 +767,10 @@ public class NoCmplCancelActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    commonHandler.showAlertDialog("미마감 처리 취소 실패","응답결과가 없음");
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showAlertDialog("미마감 처리 취소 실패","응답결과가 없음");
+                    commonHandler.showAlertDialog("미마감 처리 취소 실패",response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
                 }
                 showProgress(false);
             }
@@ -788,13 +786,14 @@ public class NoCmplCancelActivity extends AppCompatActivity {
 
 
     //텍스트 입력란 활성화 비활성화 넣기
+    /*
     private void setUseableEditText(EditText et, boolean useable) {
         et.setClickable(useable);
         et.setEnabled(useable);
         et.setFocusable(useable);
         et.setFocusableInTouchMode(useable);
     }
-
+    */
     private void noCmplCancel(){
 
 

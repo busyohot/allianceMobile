@@ -1,7 +1,7 @@
 package com.mobile.alliance.activity;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -10,12 +10,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.util.Log;
+
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -33,7 +32,7 @@ import com.mobile.alliance.api.PersistentCookieStore;
 import com.mobile.alliance.api.RetrofitClient;
 import com.mobile.alliance.api.ServiceApi;
 import com.mobile.alliance.api.TextValueHandler;
-import com.mobile.alliance.entity.noCmpl.NoCmplDelVO;
+
 import com.mobile.alliance.entity.yesCmpl.YesCmplDelVO;
 import com.mobile.alliance.entity.yesCmpl.YesCmplOnCreateVO;
 import com.mobile.alliance.entity.yesCmpl.YesCmplVO;
@@ -44,10 +43,11 @@ import java.io.IOException;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 
+import java.net.URLDecoder;
 import java.util.List;
 
 import it.sauronsoftware.ftp4j.FTPClient;
-import it.sauronsoftware.ftp4j.FTPDataTransferListener;
+
 
 import it.sauronsoftware.ftp4j.FTPException;
 import it.sauronsoftware.ftp4j.FTPIllegalReplyException;
@@ -445,7 +445,7 @@ public class YesCmplCancelActivity extends AppCompatActivity {
     private void mYesCmplReasonCombo(YesCmplVO yesCmplCancelVO) {
         service.mYesCmplReasonCombo(yesCmplCancelVO).enqueue(new Callback<List<YesCmplVO>>() {
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<List<YesCmplVO>> call, Response<List<YesCmplVO>> response) {
 
                 if(response.isSuccessful()) //응답값이 있다
@@ -614,15 +614,12 @@ public class YesCmplCancelActivity extends AppCompatActivity {
                                 yesCmplCancelService02Etc[i].setVisibility(View.GONE);
                             }
 
-
                             if(yesCmplCancelService02Code[i].getText().equals("Y"))
                             {
                                 service02 = i;
                             }
 
                             int finalI = i;
-
-
                             tRow.addView(yesCmplCancelService02Radio[i], new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
                             tRow.addView(yesCmplCancelService02Code[i], new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
                             tRow.addView(yesCmplCancelService02Etc[i], new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
@@ -667,14 +664,12 @@ public class YesCmplCancelActivity extends AppCompatActivity {
                                 yesCmplCancelService03Etc[i].setVisibility(View.GONE);
                             }
 
-
                             if(yesCmplCancelService03Code[i].getText().equals("Y"))
                             {
                                 service03 = i;
                             }
 
                             int finalI = i;
-
 
                             tRow.addView(yesCmplCancelService03Radio[i], new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
                             tRow.addView(yesCmplCancelService03Code[i], new TableRow.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
@@ -692,7 +687,10 @@ public class YesCmplCancelActivity extends AppCompatActivity {
                     showProgress(false);
                 }
                 else{
-                    commonHandler.showAlertDialog("배송취소 특이사항 조회 실패","응답결과가 없습니다.");
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showAlertDialog("배송취소 특이사항 조회 실패","응답결과가 없습니다.");
+                    commonHandler.showAlertDialog("배송취소 특이사항 조회 실패",response.code() +"\n"+ response.message()+"\n\n"+
+                            URLDecoder.decode(response.errorBody().string(),"UTF-8"));
                 }
                 showProgress(false);
             }
@@ -705,16 +703,12 @@ public class YesCmplCancelActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-
     YesCmplVO onCreateData;  //화면 열리자마자 불러온데이터 여기에 넣기(여기 넣었다가 나중에 배송취소 처리 완료 버튼 누를때 알림톡 발송 보냄)
     //화면 열리자 마자 불러오기
     private void mYesCmplOnCreate(YesCmplOnCreateVO yesCmplCancelOnCreateVO) {
         service.mYesCmplOnCreate(yesCmplCancelOnCreateVO).enqueue(new Callback<YesCmplVO>() {
 
-            @SuppressLint("LongLogTag") @Override
+            @SneakyThrows @SuppressLint("LongLogTag") @Override
             public void onResponse(Call<YesCmplVO> call, Response<YesCmplVO> response) {
 
                 if(response.isSuccessful()) //응답값이 있다
@@ -790,10 +784,6 @@ public class YesCmplCancelActivity extends AppCompatActivity {
                         yesCancelPicAddImg03.setImageBitmap(null);
                     }
 
-
-
-
-
                     if(result.getImg4() != null  && !result.getImg4().equals(""))
                     {
                         try{
@@ -860,18 +850,15 @@ public class YesCmplCancelActivity extends AppCompatActivity {
                             signCancelUri.setText(textValueHandler.HTTP_HOST + result.getSignImg());
                             signCancelFileName.setText(result.getSignImg());
 
-
-
-
                         }  catch(Exception e){
                             e.printStackTrace();
                             signatureCancelPad.setVisibility(View.INVISIBLE);
-                            Log.d(TAG,"getSignImg catch : " + textValueHandler.HTTP_HOST + result.getSignImg());
+                            //Log.d(TAG,"getSignImg catch : " + textValueHandler.HTTP_HOST + result.getSignImg());
                         }
-                    }else{signatureCancelPad.setVisibility(View.INVISIBLE);
-                        Log.d(TAG,"getSignImg else : " + textValueHandler.HTTP_HOST + result.getSignImg());}
-
-
+                    }else{
+                        signatureCancelPad.setVisibility(View.INVISIBLE);
+                        //Log.d(TAG,"getSignImg else : " + textValueHandler.HTTP_HOST + result.getSignImg());
+                    }
 
                     //착불비
                     for(int q=0;q<yesCmplCancelRcptCostRadio.length;q++)
@@ -884,7 +871,7 @@ public class YesCmplCancelActivity extends AppCompatActivity {
                             //불러들인 코드가 N이아니고 고객입금이나 현장수금을 선택했을때 입력하는 란을 활성화 시킴
                             //코드       고객입금 - CUST, 현장수금 - CASH
 
-Log.d("getDlvyCostClct",result.getDlvyCostClct());
+                            //Log.d("getDlvyCostClct",result.getDlvyCostClct());
                             if(result.getDlvyCostClct().equals("CUST")){
                                 yesCmplCancelRcptCostEtc[q].setText(result.getDlvyCostTxt());   // 고객입금 - CUST, 현장수금 - CASH 일 경우에 입력한 값 넣기
                                 yesCmplCancelRcptCostEtc[q].setTextSize(18);
@@ -957,20 +944,15 @@ Log.d("getDlvyCostClct",result.getDlvyCostClct());
                     yesCancelCmplMemo.setText(result.getMemo());
                     yesCancelCmplMemo.setTextSize(18);
 
-
-
-
-
-
-
-
-
-
-
                 }
                 else{
                     //commonHandler.showToast("배송취소 onCreate 데이터 조회 실패\n응답결과가 없음",0,17,17);
-                    commonHandler.showFinishAlertDialog("배송취소 onCreate 데이터 조회 실패","응답결과가 없거나 여러개 입니다.\n[instMobileMId : "+instMobileMIdValue+"]\n이전화면으로 이동합니다","Y");
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showFinishAlertDialog("배송취소 onCreate 데이터 조회 실패","응답결과가 없거나 여러개 입니다.\n[instMobileMId : "+instMobileMIdValue+"]\n이전화면으로 이동합니다","Y");
+                    commonHandler.showFinishAlertDialog("배송취소 onCreate 데이터 조회 실패",
+                            response.code() +"\n"+ response.message()+"\n\n"+
+                                    URLDecoder.decode(response.errorBody().string(),"UTF-8"),
+                            "Y");
                 }
                 showProgress(false);
             }
@@ -984,13 +966,11 @@ Log.d("getDlvyCostClct",result.getDlvyCostClct());
         });
     }
 
-
-
     //배송취소 처리 버튼 눌렀을떄 (SAVE)
     private void mYesCmplDel(YesCmplDelVO yesCmplDelVO) {
         service.mYesCmplDel(yesCmplDelVO).enqueue(new Callback<YesCmplVO>() {
 
-            @Override
+            @SneakyThrows @Override
             public void onResponse(Call<YesCmplVO> call, Response<YesCmplVO> response) {
 
                 if(response.isSuccessful()) //응답값이 있다
@@ -1032,7 +1012,6 @@ Log.d("getDlvyCostClct",result.getDlvyCostClct());
                             }
                         });
 
-
                     }
                     else
                     {
@@ -1042,7 +1021,11 @@ Log.d("getDlvyCostClct",result.getDlvyCostClct());
 
                 }
                 else{
-                    commonHandler.showAlertDialog("배송취소 처리 저장 실패","응답결과가 없음");
+                    //20220120 정연호 수정. was에서 [500 internal server error] excpition발생시 오류추적번호 나오게 변경
+                    //commonHandler.showAlertDialog("배송취소 처리 저장 실패","응답결과가 없음");
+                    commonHandler.showAlertDialog("배송취소 처리 저장 실패",
+                            response.code() +"\n"+ response.message()+"\n\n"+
+                                    URLDecoder.decode(response.errorBody().string(),"UTF-8"));
                 }
                 showProgress(false);
             }
@@ -1054,10 +1037,6 @@ Log.d("getDlvyCostClct",result.getDlvyCostClct());
             }
         });
     }
-
-
-
-
     //배송취소 화면 나가기
     private void yesCmplCancelCancel(){
 

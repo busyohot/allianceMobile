@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.mobile.alliance.R;
 import com.mobile.alliance.api.BackPressCloseHandler;
@@ -28,11 +28,6 @@ import com.mobile.alliance.api.PersistentCookieStore;
 import com.mobile.alliance.api.RetrofitClient;
 import com.mobile.alliance.api.ServiceApi;
 import com.mobile.alliance.entity.phoneCheck.PhoneCheckSendVO;
-import com.mobile.alliance.entity.sendTalk.SaveTalkVO;
-import com.mobile.alliance.entity.sendTalk.SendTalkVO;
-import com.mobile.alliance.entity.sendTalk.TalkVO;
-
-import org.w3c.dom.Text;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -64,9 +59,6 @@ public class PhoneCheckActivity extends AppCompatActivity {
     static SharedPreferences sharePref = null;
     static SharedPreferences.Editor editor = null;
 
-
-    //공통
-    //private CommonHandler commonHandler;
     //공통
     CommonHandler commonHandler;
 
@@ -79,12 +71,12 @@ public class PhoneCheckActivity extends AppCompatActivity {
     Button authBtn,authChkBtn;
     int randomNum; //인증번호 6자리숫자
 
-
     CountDownTimer countDownTimer;
 
     String loginIdValue="";
 
-    @SuppressLint("LongLogTag") @Override
+    @SuppressLint("LongLogTag")
+    @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_check);
@@ -117,14 +109,12 @@ public class PhoneCheckActivity extends AppCompatActivity {
         CookieManager cookieManager = new CookieManager();
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
 
-
         client = new OkHttpClient
                 .Builder()
                 .cookieJar(new JavaNetCookieJar(cookieManager))
                 //.cookieJar(new JavaNetCookieJar(CookieManager()))
                 .addInterceptor(commonHandler.httpLoggingInterceptor())
                 .build();
-
 
         serviceTalk = RetrofitClient.getTalk(client).create(ServiceApi.class);  //알림톡용
 
@@ -133,9 +123,6 @@ public class PhoneCheckActivity extends AppCompatActivity {
         //내부에 데이터 저장하는것
         sharePref = getSharedPreferences(SHARE_NAME, MODE_PRIVATE);
         editor = sharePref.edit();
-
-
-
 
         // 화면에 보일 TextView
         count_view = (TextView) findViewById(R.id.count_view);
@@ -182,8 +169,6 @@ public class PhoneCheckActivity extends AppCompatActivity {
             }
         });
 
-
-
         //화면 아래 확인버튼
         authChkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,13 +202,10 @@ public class PhoneCheckActivity extends AppCompatActivity {
 
                         @Override
                         public void onClick(View v) {
-
                             alertDialog.dismiss();
-
                         }
                     });
                 }
-
             }
         });
 
@@ -239,7 +221,6 @@ public class PhoneCheckActivity extends AppCompatActivity {
             }
         });
 
-
         //인증요청 발송버튼을 눌렀을때
         authBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -249,17 +230,16 @@ public class PhoneCheckActivity extends AppCompatActivity {
                 count_notice.setVisibility(View.VISIBLE);
                 countAuthNo.setVisibility(View.VISIBLE);
 
-
-
-
-
                 randomNum = random.nextInt(max_num_value - min_num_value + 1) + min_num_value;
                 authNo.setText(randomNum+"");
+
+                //20220122 정연호 추가
+                Log.d("PhoneCheckActivity",randomNum+"");
 
                 ArrayList<PhoneCheckSendVO> send = new ArrayList<PhoneCheckSendVO>();
                 send.add(new PhoneCheckSendVO(
                         "AT"                    //알림톡 발송유형
-                        //0505hphphphphphp
+
                         //알림톡 발송 문자문자 인증번호 받기
                         , sharePref.getString("PhoneNum","")    //알림톡 받는사람 전화번호
 
@@ -282,9 +262,7 @@ public class PhoneCheckActivity extends AppCompatActivity {
                 countAuthNo.setEnabled(true);
                 authChkBtn.setClickable(true);
             }
-
         });
-
     }
 
     @Override
@@ -296,30 +274,23 @@ public class PhoneCheckActivity extends AppCompatActivity {
         PhoneCheckActivity.this.finish();     //이 액티비티를 닫음
     }
 
-
-
-
+    //알림톡을 발송하는 부분
     private void mPhoneCheckSend(ArrayList< PhoneCheckSendVO > phoneCheckSendVO) {    //요청 VO
-
         serviceTalk.mPhoneCheckSend(phoneCheckSendVO).enqueue(new Callback<ArrayList<PhoneCheckSendVO>>() {    //앞 요청VO, CallBack 응답 VO
-
             @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<ArrayList<PhoneCheckSendVO>> call, Response<ArrayList<PhoneCheckSendVO>> response) {  //둘다 응답 VO
-                //Log.d("mPhoneCheckSend_onResponse","success");
+
             }
             @SuppressLint("LongLogTag")
             @Override
             public void onFailure(Call<ArrayList<PhoneCheckSendVO>> call, Throwable t) {
-                //Log.d("mPhoneCheckSend_onFailure",t.toString());
+
             }
         });
     }
 
-
-
     public void countDown(String time) {
-
         long conversionTime = 0;
 
         // 1000 단위가 1초
@@ -382,14 +353,12 @@ public class PhoneCheckActivity extends AppCompatActivity {
                 if (second.length() == 1) {
                     second = "0" + second;
                 }
-
                 //count_view.setText(hour + ":" + min + ":" + second);
                 count_view.setText(min + ":" + second);
             }
 
             // 제한시간 종료시
             public void onFinish() {
-
                 // 변경 후
                 //count_view.setText("촬영종료!");
                 count_view.setText("00:00");
@@ -402,18 +371,14 @@ public class PhoneCheckActivity extends AppCompatActivity {
                 countAuthNo.setText("");
                 countAuthNo.setEnabled(false);
                 authChkBtn.setClickable(false);
-                //authChkBtn.setClickable(false);
 
                 count_send.setVisibility(View.GONE);
                 count_notice.setVisibility(View.GONE);
                 countAuthNo.setVisibility(View.GONE);
 
                 authChkBtn.setBackground(getApplicationContext().getDrawable(R.drawable.rounded_gray_button));
-
             }
         };
-
         countDownTimer.start();
-
     }
 }
