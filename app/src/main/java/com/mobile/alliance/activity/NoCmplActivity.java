@@ -2056,6 +2056,7 @@ public class NoCmplActivity extends AppCompatActivity {
                 , onCreateData.getSmsonly()        //알림톡 실패시 문자를 보낼것인가 여부
                 , null
         ));
+        /*
         if(onCreateData.getAgntSendYn().equals("Y")){   //화주사 알림톡 수신 여부
             send.add(new SendTalkVO(
                     onCreateData.getMessageType()                   //알림톡 발송유형
@@ -2073,7 +2074,33 @@ public class NoCmplActivity extends AppCompatActivity {
                     , null
             ));
         }
-
+        */
+        //20220219 정연호 미마감시 화주사에게 문자보내기 전화번호 호출방법 변경
+        String[] agntSend = onCreateData.getAgntSendHp1().split(",");
+        if(agntSend != null){
+            for (int i = 0; i < agntSend.length; i++) {
+                if(agntSend[i].trim().length() > 0){
+                    if(onCreateData.getAgntSendYn().equals("Y")){   //화주사 알림톡 수신 여부
+                        send.add(new SendTalkVO(
+                                onCreateData.getMessageType()                   //알림톡 발송유형
+                                //20220219 정연호 미마감시 화주사에게 문자보내기 전화번호 호출방법 변경
+                                //, onCreateData.getAgntSendHp1()    //화주사 관리자 전화번호        //sharePref.getString("PhoneNum", "")
+                                , agntSend[i]
+                                , onCreateData.getProfile()                        //알림톡 프로필 아이디
+                                , "00000000000000"             //발송시간 0 14개 : 즉시발송
+                                , onCreateData.getTmplid()         //알림톡 템플릿아이디
+                                , completeMsg      //알림톡 보낼 메세지
+                                , onCreateData.getSmskind()         //알림톡 실패시 문자 발송 종류
+                                , completeMsg          //알림톡 실패시 문자로 보낼 메세지
+                                , onCreateData.getSmssender()         //알림톡 실패시 문자 발송할때 발송자 전화번호
+                                , onCreateData.getSmslmstit()            //알림톡 실패시 문자발송할때 LMS 의 제목
+                                , onCreateData.getSmsonly()        //알림톡 실패시 문자를 보낼것인가 여부
+                                , null
+                        ));
+                    }
+                }
+            }
+        }
 
         Log.d("sendsend",send.toString());
         mSendTalk(send);    // 알림톡 발송하는 부분
